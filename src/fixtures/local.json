@@ -1,0 +1,38 @@
+{
+  "baseUrl": "http://localhost:4000",
+  "$schema": "https://on.cypress.io/cypress.schema.json",
+  "env": {
+    "environment": "local",
+    "usernameLookupUserNotFoundError": "No username found. Try again, or register your account.",
+    "registerUnknownCustomerError": "It’s not you. It’s us. Please give it another try.",
+    "testUsers": [
+      {
+        "username": "username1",
+        "lastname": "Lastname",
+        "password": "passWord###212",
+        "dob": "09-09-1990",
+        "ssn": "987655",
+        "email": "email1z@gmail.com",
+        "cid": "987654321"
+      },
+      {
+        "username": "username2",
+        "lastname": "Lastname",
+        "password": "passWord###212",
+        "dob": "09-09-1990",
+        "ssn": "123456",
+        "email": "email2@gmail.com",
+        "cid": "123456789"
+      },
+      {
+        "username": "username3",
+        "lastname": "Lastname",
+        "password": "passWord###212",
+        "dob": "09-09-1990",
+        "ssn": "123456",
+        "email": "email3@gmail.com",
+        "cid": "1234567822"
+      }
+    ]
+  }
+}
