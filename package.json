@@ -4,15 +4,27 @@
   "description": "automation test suite for BEFH",
   "main": "index.js",
   "repository": "https://github.com/MarletteFunding/befh-automation-testing.git",
-  "author": "George Kuhl <george.kuhl@bestegg.com>",
+  "author": "George Kuhl <george.kuhl@bestegg.com>, Ulisses Filho <ulisses.filho@tivix.com",
   "license": "MIT",
   "scripts": {
     "build": "echo \"building docker image\"; docker build --platform linux/arm64 -t \"befh-cypress\" .",
     "up": "docker run -it -v $PWD:/fixtures -w /fixtures cypress/included:10.8.0"
   },
   "devDependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "^13.0.2",
+    "@cypress/browserify-preprocessor": "^3.0.2",
+    "@cypress/webpack-preprocessor": "^5.12.2",
     "cypress": "^10.8.0",
     "cypress-cucumber-preprocessor": "^4.3.1",
     "fs-extra": "^10.1.0"
+  },
+  "cypress-cucumber-preprocessor": {
+    "stepDefinitions": [
+      "**/cypress/e2e/**/*.js",
+      "**/cypress/e2e/*.js"
+    ]
+  },
+  "dependencies": {
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.1.5"
   }
 }
