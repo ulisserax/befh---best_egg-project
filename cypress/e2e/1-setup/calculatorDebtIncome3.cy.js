@@ -51,13 +51,16 @@ When(/^i click 'Calculate Debts'$/, () => {
 });
 
 Then(/^the sum of the Debts fields is displayed under 'Calculate Debts' as 'Itemized Debts Applied'$/, () => {
-	return true;
+	cy.CheckingSumVisible();
 });
 
 Then(/^the sum is displayed under Annual Debts$/, () => {
-	return true;
+	cy.CheckingSumVisible();
 });
 
 Then(/^clicking 'Itemize my Debts' closes the added fields, but the sum remains in the Annual Debts field$/, () => {
-	return true;
+	cy.ItemizeMyIncomes();
+	cy.ItemizeMyDebts();
+	cy.CheckingSumAfterClosing();
+	
 });

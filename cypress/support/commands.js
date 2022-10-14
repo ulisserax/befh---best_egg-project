@@ -1,8 +1,6 @@
 //===============================================================================================================================================
 //Articles' Page Commands
 
-import { isNumber } from "cypress/types/lodash";
-
 Cypress.Commands.add('LoginPage', () =>{
     cy.visit('/');
 })
@@ -210,7 +208,6 @@ Cypress.Commands.add('RecentBlogLink', () =>{
 })
 
 //===============================================================================================================================================
-
 //Calculator's Page Commands
 
 Cypress.Commands.add('SliderClick', () =>{
@@ -474,14 +471,14 @@ Cypress.Commands.add('InputDebtValues', () =>{
         cy.get(element.otherMonthlyDebtPayment).type(inputDebt);   
     })
 
-    while(i<6){
-        let elemIntoArray = inputDebt;
-        let inputDebtNumber = Math.floor(elemIntoArray);
-        inputDebtArray.push(inputDebtNumber);
-        cy.log(inputDebtArray);
-        i++;
-    }
-    cy.log(inputDebtArray);
+    // while(i<6){
+    //     let elemIntoArray = inputDebt;
+    //     //let inputDebtNumber = Math.floor(elemIntoArray);
+    //     inputDebtArray.push(inputDebtNumber);
+    //     cy.log(inputDebtArray);
+    //     i++;
+    // }
+    // cy.log(inputDebtArray);
 })
 
 let inputAnnual = '80';
@@ -500,13 +497,13 @@ Cypress.Commands.add('InputAnnualValues', () =>{
         cy.get(element.otherAnnualIncome).type(inputAnnual);
     })
 
-    while(i<8){
-        let elemIntoArray = inputAnnual;
-        let inputAnnualNumber = Math.floor(elemIntoArray);
-        inputAnnualArray.push(inputAnnualNumber);
-        cy.log(inputAnnualArray);
-        i++;
-    }
+    // while(i<8){
+    //     let elemIntoArray = inputAnnual;
+    //     let inputAnnualNumber = Math.floor(elemIntoArray);
+    //     inputAnnualArray.push(inputAnnualNumber);
+    //     cy.log(inputAnnualArray);
+    //     i++;
+    // }
 })
 
 Cypress.Commands.add('CheckIfNotEmpty', () =>{
@@ -525,5 +522,19 @@ Cypress.Commands.add('ClickCalculatorDebt', () =>{
         cy.get(element.calculatorButtonDebt).click();
     })
 })
+
+Cypress.Commands.add('CheckingSumVisible', () =>{
+    cy.fixture("elements").then((element) => {
+        cy.get(element.calculatorSumResult).should('be.visible');
+    })
+})
+
+Cypress.Commands.add('CheckingSumAfterClosing', () =>{
+    cy.fixture("elements").then((element) => {
+        cy.get(element.annualIncome).should('contain.value', '640');
+        cy.get(element.monthlyDebt).should('contain.value', '360');
+    })
+})
+
 
 //===============================================================================================================================================
