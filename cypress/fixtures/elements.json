@@ -63,7 +63,8 @@
     "annualChildSupport": "input[id='Annual Child Support']",
     "annualRetirement": "input[id='Annual Retirement (Social Security)']",
     "annualRealEstate": "input[id='Annual Real Estate Income']",
-    "otherAnnualIncome": "input[id='Other Annual Income']"
+    "otherAnnualIncome": "input[id='Other Annual Income']",
+    "calculatorSumResult": "p[class='text-sm text-gray-500 dti-itemized-results']"
 
 
 
