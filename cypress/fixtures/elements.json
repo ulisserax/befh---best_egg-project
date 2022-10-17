@@ -64,7 +64,8 @@
     "annualRetirement": "input[id='Annual Retirement (Social Security)']",
     "annualRealEstate": "input[id='Annual Real Estate Income']",
     "otherAnnualIncome": "input[id='Other Annual Income']",
-    "calculatorSumResult": "p[class='text-sm text-gray-500 dti-itemized-results']"
+    "calculatorSumResult": "p[class='text-sm text-gray-500 dti-itemized-results']",
+    "ratingText": "h3[class='text-red-500 font-semibold font-serif text-xl flex items-center dti-results-header']"
 
 
 

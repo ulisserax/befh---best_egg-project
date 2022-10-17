@@ -40,7 +40,6 @@ Then(/^i can only enter numerical values, or an error message displays$/, () => 
 });
 
 When(/^i enter data into the available fields$/, () => {
-	//cy.ItemizeMyDebts();
 	cy.ItemizeMyIncomes();
 	cy.InputDebtValues();
 	cy.InputAnnualValues();

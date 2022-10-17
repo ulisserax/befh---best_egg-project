@@ -470,15 +470,6 @@ Cypress.Commands.add('InputDebtValues', () =>{
         cy.get(element.monthlyPersonalLoanPayment).type(inputDebt);
         cy.get(element.otherMonthlyDebtPayment).type(inputDebt);   
     })
-
-    // while(i<6){
-    //     let elemIntoArray = inputDebt;
-    //     //let inputDebtNumber = Math.floor(elemIntoArray);
-    //     inputDebtArray.push(inputDebtNumber);
-    //     cy.log(inputDebtArray);
-    //     i++;
-    // }
-    // cy.log(inputDebtArray);
 })
 
 let inputAnnual = '80';
@@ -497,13 +488,6 @@ Cypress.Commands.add('InputAnnualValues', () =>{
         cy.get(element.otherAnnualIncome).type(inputAnnual);
     })
 
-    // while(i<8){
-    //     let elemIntoArray = inputAnnual;
-    //     let inputAnnualNumber = Math.floor(elemIntoArray);
-    //     inputAnnualArray.push(inputAnnualNumber);
-    //     cy.log(inputAnnualArray);
-    //     i++;
-    // }
 })
 
 Cypress.Commands.add('CheckIfNotEmpty', () =>{
@@ -536,5 +520,32 @@ Cypress.Commands.add('CheckingSumAfterClosing', () =>{
     })
 })
 
+Cypress.Commands.add('AnnualIncomeType', (annualIncome) =>{
+    cy.fixture("elements").then((element) => {
+        cy.get(element.annualIncome).type(annualIncome);
+    })
+})
+
+Cypress.Commands.add('MonthlyDebtType', (monthlyDebt) =>{
+    cy.fixture("elements").then((element) => {
+        cy.get(element.monthlyDebt).type(monthlyDebt);
+    })
+})
+
+let ratingText = '';
+Cypress.Commands.add('RatingCheck', (rating) =>{
+    cy.fixture("elements").then((element) => {
+        cy.get(element.ratingText).then(($span) => {
+            ratingText = $span.text();
+            cy.log(ratingText);
+        })
+        if(rating === ratingText){
+            cy.log("texts are equal")
+        }
+        else{
+            cy.log(rating);
+        }
+    })
+})
 
 //===============================================================================================================================================
