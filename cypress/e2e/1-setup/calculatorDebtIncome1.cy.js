@@ -4,11 +4,17 @@ import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
 
 
 Given(/^I am on the Calculators header page$/, () => {
-	return true;
+	cy.LoginPage();
+	cy.SetUsername();
+	cy.SetPassword();
+	cy.ClickLoginButton();
+	cy.wait(8000).PopupClose();
+	cy.contains('Financial Health').click();
+	cy.contains('Calculators').click();
 });
 
 Then(/^I have selected the 'Debt to Income' tab$/, () => {
-	return true;
+	cy.DebtToIncomeTab();
 });
 
 When(/^I enter Annual income (before taxes)$/, () => {
@@ -67,12 +73,17 @@ Then(/^My debt-to-income value updates$/, () => {
 	return true;
 });
 
-When(/^my ratio is "([^"]*)"$/, (ratio) => {
-	return true;
+When(/^my annual income is "([^"]*)"$/, (annualIncome) => {
+	cy.AnnualIncomeType(annualIncome);
+});
+
+When(/^my monthly debt is "([^"]*)"$/, (monthlyDebt) => {
+	cy.MonthlyDebtType(monthlyDebt);
 });
 
 Then(/^my rating is "([^"]*)"$/, (rating) => {
-	return true;
+	cy.ClickCalculatorDebt();
+	cy.RatingCheck(rating);
 });
 
 When(/^I click 'Itemize my Income'$/, () => {

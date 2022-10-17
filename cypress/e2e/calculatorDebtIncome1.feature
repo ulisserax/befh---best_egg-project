@@ -41,14 +41,15 @@ Scenario:  Modify Debt to Income Ratio
 #======================================================================================================================
 Scenario Outline:  Debt-to-income rating
 
-    When my ratio is <ratio>
-    Then my rating is <rating>
+    When my annual income is "<annualIncome>"
+    When my monthly debt is "<monthlyDebt>"
+    Then my rating is "<rating>"
 
        Examples:
-        |         ratio        |      rating  |
-        |  Lower than 35%      |    Very good |
-        |  Between 35% and 45% |      Fair    |
-        |  50% or higher       |      Poor    |
+        |      annualIncome   |       monthlyDebt       |      rating  |
+        |         1200        |            30           |    Very good |
+        |         1000        |            30           |      Fair    |
+        |         800         |            30           |      Poor    |
 
 
  
