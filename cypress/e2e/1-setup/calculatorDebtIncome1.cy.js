@@ -17,68 +17,82 @@ Then(/^I have selected the 'Debt to Income' tab$/, () => {
 	cy.DebtToIncomeTab();
 });
 
-When(/^I enter Annual income (before taxes)$/, () => {
-	return true;
+When(/^I enter Annual income - before taxes$/, () => {
+	cy.AnnualIncomeTyping2();
 });
 
 When(/^I enter Monthly debt payments$/, () => {
-	return true;
+	cy.MonthlyDebtTyping2();
 });
 
 Then(/^the 'Calculate' button enables$/, () => {
-	return true;
+	cy.CheckCalculatorDebt();
 });
 
 Given(/^I have entered values for Annual Income and Monthly debt payments$/, () => {
-	return true;
+	cy.AnnualIncomeTyping2();
+	cy.MonthlyDebtTyping2();
 });
 
 Then(/^the Calculate button is enabled$/, () => {
-	return true;
+	cy.CheckCalculatorDebt();
 });
 
 When(/^I erase either the Annual Income or Monthly debt payments field$/, () => {
-	return true;
+	cy.AnnualIncomeErasing();
+	cy.MonthlyDebtErasing();
 });
 
 Then(/^the Calculate button is disabled$/, () => {
-	return true;
+	cy.CalculatorDebtNotExist();
 });
 
 When(/^I submit both Annual income and Monthly debt payments$/, () => {
-	return true;
+	cy.AnnualIncomeTyping2();
+	cy.MonthlyDebtTyping2();
+	cy.ClickCalculatorDebt();
 });
 
 Then(/^My debt-to-income ratio is displayed beneath the calculator$/, () => {
-	return true;
+	cy.RatioBubbleVisible();
 });
 
-Then(/^The ratio is accurately calculated - e.g. if I say my income is $120,000 and my monthly payments are $1,000, the ratio should be 10%$/, () => {
-	return true;
+Then(/^The ratio is accurately calculated - e.g. if I say my income is 120,000 and my monthly payments are 1,000, the ratio should be 10%$/, () => {
+	cy.AnnualIncomeErasing();
+	cy.MonthlyDebtErasing();
+	cy.AnnualIncomeSpecific();
+	cy.MonthlyDebtSpecific();
+	cy.ClickCalculatorDebt();
+	cy.RatioBubbleResult();
 });
 
 Given(/^I have already calculated my debt-to-income ratio$/, () => {
-	return true;
+	cy.AnnualIncomeSpecific();
+	cy.MonthlyDebtSpecific();
+	cy.ClickCalculatorDebt();
 });
 
 When(/^I modify either annual income or monthly debt payments$/, () => {
-	return true;
+	cy.AnnualIncomeErasing();
+	cy.MonthlyDebtErasing();
+	cy.AnnualIncomeModify();
+	cy.MonthlyDebtModify();
 });
 
 When(/^I click calculate$/, () => {
-	return true;
+	cy.ClickCalculatorDebt();
 });
 
 Then(/^My debt-to-income value updates$/, () => {
-	return true;
+	cy.RatioBubbleResultModify();
 });
 
 When(/^my annual income is "([^"]*)"$/, (annualIncome) => {
-	cy.AnnualIncomeType(annualIncome);
+	cy.AnnualIncomeTyping(annualIncome);
 });
 
 When(/^my monthly debt is "([^"]*)"$/, (monthlyDebt) => {
-	cy.MonthlyDebtType(monthlyDebt);
+	cy.MonthlyDebtTyping(monthlyDebt);
 });
 
 Then(/^my rating is "([^"]*)"$/, (rating) => {
@@ -87,33 +101,34 @@ Then(/^my rating is "([^"]*)"$/, (rating) => {
 });
 
 When(/^I click 'Itemize my Income'$/, () => {
-	return true;
+	cy.ItemizeMyIncomes();
 });
 
 Then(/^additional fields appear beneath the Annual Income field$/, () => {
-	return true;
+	cy.AnnualValuesVisible();
 });
 
 Then(/^The Annual Income field is locked$/, () => {
-	return true;
+	cy.AnnualIncomeDisabled();
 });
 
 Then(/^I can enter numerical data into these fields$/, () => {
-	return true;
+	cy.InputAnnualValues();
 });
 
 Then(/^These fields disappear if I click 'Itemize my Income' again$/, () => {
-	return true;
+	cy.ItemizeMyIncomes();
+	cy.InputAnnualValuesNotVisible();
 });
 
 When(/^I click 'Itemize my Debts'$/, () => {
-	return true;
+	cy.ItemizeMyDebts();
 });
 
 Then(/^additional fields appear beneath the Monthly debt payments field$/, () => {
-	return true;
+	cy.MonthlyDebtVisible();
 });
 
 Then(/^I can dismiss these fields by clicking 'Itemize my Debts' again$/, () => {
-	return true;
+	cy.ItemizeMyDebts();
 });

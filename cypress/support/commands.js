@@ -302,13 +302,13 @@ Cypress.Commands.add('NotEstimateMonthlyPayment', () =>{
 Cypress.Commands.add('SliderClickAdjust', () =>{
     cy.fixture("elements").then((element) => {
         
-        const currentValue = 2000;
+        const currentValue = 10000;
         const targetValue = 20000;
         const increment = 1000;
         const step = (targetValue - currentValue)/increment;
         const arrows = '{rightArrow}'.repeat(step);
         
-        cy.get(element.slider).should('have.attr', 'aria-valuenow', 2000).type(arrows);
+        cy.get(element.slider).should('have.attr', 'aria-valuenow', 10000).type(arrows);
         cy.get(element.slider).should('have.attr', 'aria-valuenow', 20000)
     })
 })
@@ -330,6 +330,20 @@ Cypress.Commands.add('InputValues', () =>{
         cy.get(element.creditCardBalance).type('10000');
         cy.get(element.interestRate).type('10');
         cy.get(element.monthlyPayments).type('1000');
+    })
+})
+
+Cypress.Commands.add('InputNonNumericalValues', () =>{
+    cy.fixture("elements").then((element) => {
+        cy.get(element.creditCardBalance).type('.');
+        cy.get(element.interestRate).type('.');
+        cy.get(element.monthlyPayments).type('.');
+    })
+})
+
+Cypress.Commands.add('InputNotValid', () =>{
+    cy.fixture("elements").then((element) => {
+        cy.get(element.alertPayments).should('be.visible');
     })
 })
 
@@ -458,10 +472,7 @@ Cypress.Commands.add('NonNumericalValuesInput', () =>{
 })
 
 let inputDebt = '60';
-let sumOfElementsDebt = 0;
-let inputDebtArray = [];
 Cypress.Commands.add('InputDebtValues', () =>{
-    var i = 0;
     cy.fixture("elements").then((element) => {
         cy.get(element.monthlyRentPayment).type(inputDebt);
         cy.get(element.monthlyMortgagePayment).type(inputDebt);
@@ -473,10 +484,7 @@ Cypress.Commands.add('InputDebtValues', () =>{
 })
 
 let inputAnnual = '80';
-let sumOfElementsAnnual = 0;
-let inputAnnualArray = [];
 Cypress.Commands.add('InputAnnualValues', () =>{
-    var i = 0;
     cy.fixture("elements").then((element) => {
         cy.get(element.annualSalaryWages).type(inputAnnual);
         cy.get(element.annualAverageCommission).type(inputAnnual);
@@ -486,6 +494,20 @@ Cypress.Commands.add('InputAnnualValues', () =>{
         cy.get(element.annualRetirement).type(inputAnnual);
         cy.get(element.annualRealEstate).type(inputAnnual);
         cy.get(element.otherAnnualIncome).type(inputAnnual);
+    })
+
+})
+
+Cypress.Commands.add('InputAnnualValuesNotVisible', () =>{
+    cy.fixture("elements").then((element) => {
+        cy.get(element.annualSalaryWages).should('not.exist');
+        cy.get(element.annualAverageCommission).should('not.exist');
+        cy.get(element.annualDividendIncome).should('not.exist');
+        cy.get(element.annualAlimony).should('not.exist');
+        cy.get(element.annualChildSupport).should('not.exist');
+        cy.get(element.annualRetirement).should('not.exist');
+        cy.get(element.annualRealEstate).should('not.exist');
+        cy.get(element.otherAnnualIncome).should('not.exist');
     })
 
 })
@@ -507,6 +529,18 @@ Cypress.Commands.add('ClickCalculatorDebt', () =>{
     })
 })
 
+Cypress.Commands.add('CheckCalculatorDebt', () =>{
+    cy.fixture("elements").then((element) => {
+        cy.get(element.calculatorButtonDebt).should('be.visible');
+    })
+})
+
+Cypress.Commands.add('CalculatorDebtNotExist', () =>{
+    cy.fixture("elements").then((element) => {
+        cy.get(element.calculatorButtonDebt).should('not.exist');
+    })
+})
+
 Cypress.Commands.add('CheckingSumVisible', () =>{
     cy.fixture("elements").then((element) => {
         cy.get(element.calculatorSumResult).should('be.visible');
@@ -520,31 +554,151 @@ Cypress.Commands.add('CheckingSumAfterClosing', () =>{
     })
 })
 
-Cypress.Commands.add('AnnualIncomeType', (annualIncome) =>{
+Cypress.Commands.add('AnnualIncomeTyping', (annualIncome) =>{
     cy.fixture("elements").then((element) => {
         cy.get(element.annualIncome).type(annualIncome);
     })
 })
 
-Cypress.Commands.add('MonthlyDebtType', (monthlyDebt) =>{
+Cypress.Commands.add('AnnualIncomeDisabled', () =>{
+    cy.fixture("elements").then((element) => {
+        cy.get(element.annualIncome).should('be.disabled');
+        cy.log('Annual Income Disabled.');
+    })
+})
+
+Cypress.Commands.add('AnnualIncomeTyping2', () =>{
+    cy.fixture("elements").then((element) => {
+        cy.get(element.annualIncome).type('5000');
+    })
+})
+
+Cypress.Commands.add('AnnualIncomeSpecific', () =>{
+    cy.fixture("elements").then((element) => {
+        cy.get(element.annualIncome).type('120000');
+    })
+})
+
+Cypress.Commands.add('AnnualIncomeModify', () =>{
+    cy.fixture("elements").then((element) => {
+        cy.get(element.annualIncome).type('150000');
+    })
+})
+
+Cypress.Commands.add('AnnualIncomeErasing', () =>{
+    cy.fixture("elements").then((element) => {
+        cy.get(element.annualIncome).clear();
+    })
+})
+
+Cypress.Commands.add('MonthlyDebtTyping', (monthlyDebt) =>{
     cy.fixture("elements").then((element) => {
         cy.get(element.monthlyDebt).type(monthlyDebt);
     })
 })
 
-let ratingText = '';
+Cypress.Commands.add('MonthlyDebtTyping2', () =>{
+    cy.fixture("elements").then((element) => {
+        cy.get(element.monthlyDebt).type('100');
+    })
+})
+
+Cypress.Commands.add('MonthlyDebtSpecific', () =>{
+    cy.fixture("elements").then((element) => {
+        cy.get(element.monthlyDebt).type('1000');
+    })
+})
+
+Cypress.Commands.add('MonthlyDebtModify', () =>{
+    cy.fixture("elements").then((element) => {
+        cy.get(element.monthlyDebt).type('500');
+    })
+})
+
+Cypress.Commands.add('MonthlyDebtErasing', () =>{
+    cy.fixture("elements").then((element) => {
+        cy.get(element.monthlyDebt).clear();
+    })
+})
+
 Cypress.Commands.add('RatingCheck', (rating) =>{
     cy.fixture("elements").then((element) => {
         cy.get(element.ratingText).then(($span) => {
-            ratingText = $span.text();
-            cy.log(ratingText);
+            const ratingString = $span.text().slice(3);
+
+            if(rating.trim() === ratingString.trim()){
+                cy.log("texts are equal");
+                expect(true).to.be.true;
+            }
+            else{
+                cy.log("texts are not equal");
+                expect(true).to.be.false;
+            }
         })
-        if(rating === ratingText){
-            cy.log("texts are equal")
-        }
-        else{
-            cy.log(rating);
-        }
+    })
+})
+
+Cypress.Commands.add('RatioBubbleVisible', () =>{
+    cy.fixture("elements").then((element) => {
+        cy.get(element.ratioBubble).should('be.visible');
+    })
+})
+
+Cypress.Commands.add('RatioBubbleResult', () =>{
+    cy.fixture("elements").then((element) => {
+        cy.get(element.ratioBubble).then(($span) => {
+            const textBubble = $span.text().slice(27);
+            cy.log(textBubble);
+            if (textBubble.trim() === '10%'.trim()){
+                cy.log('The result is 10% !')
+                expect(true).to.be.true;
+            }
+            else{
+                cy.log('TEXTS ARE NOT EQUAL!')
+            }
+        })
+    })
+})
+
+Cypress.Commands.add('RatioBubbleResultModify', () =>{
+    cy.fixture("elements").then((element) => {
+        cy.get(element.ratioBubble).then(($span) => {
+            const textBubble = $span.text().slice(27);
+            cy.log(textBubble);
+            if (textBubble.trim() === '4%'.trim()){
+                cy.log('The result is 4% !')
+                expect(true).to.be.true;
+            }
+            else{
+                cy.log('TEXTS ARE NOT EQUAL!')
+            }
+        })
+    })
+})
+
+Cypress.Commands.add('AnnualValuesVisible', () =>{
+    var i = 0;
+    cy.fixture("elements").then((element) => {
+        cy.get(element.annualSalaryWages).should('be.visible');
+        cy.get(element.annualAverageCommission).should('be.visible');
+        cy.get(element.annualDividendIncome).should('be.visible');
+        cy.get(element.annualAlimony).should('be.visible'); 
+        cy.get(element.annualChildSupport).should('be.visible');
+        cy.get(element.annualRetirement).should('be.visible');
+        cy.get(element.annualRealEstate).should('be.visible');
+        cy.get(element.otherAnnualIncome).should('be.visible');
+    })
+
+})
+
+Cypress.Commands.add('MonthlyDebtVisible', () =>{
+    cy.fixture("elements").then((element) => {
+        cy.get(element.monthlyRentPayment).should('be.visible');
+        cy.get(element.monthlyMortgagePayment).should('be.visible');
+        cy.get(element.monthlyLoanLeasePayment).should('be.visible');
+        cy.get(element.monthlyCreditCardPayment).should('be.visible');
+        cy.get(element.monthlyPersonalLoanPayment).should('be.visible');
+        cy.get(element.otherMonthlyDebtPayment).should('be.visible'); 
     })
 })
 

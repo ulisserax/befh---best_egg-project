@@ -33,7 +33,6 @@ When(/^I click 'Calculate'$/, () => {
 });
 
 Then(/^an Estimated Monthly Payment is displayed$/, () => {
-	//assert if it's displaying the thumbnail that regards the totally payment estimative
 	cy.EstimateMonthlyPayment();
 });
 
@@ -43,8 +42,6 @@ Given(/^I have already submitted info and see an Estimated Monthly Payment$/, ()
 });
 
 When(/^I adjust the Loan Amount, Term Length, or the Credit Score$/, () => {
-	//cy.SliderClickAdjust();
-	//cy.ClickTermButtonAdjust();
 	cy.DropdownLoanAdjust();
 });
 
@@ -53,11 +50,13 @@ Then(/^The Estimated Monthly Payment field disappears$/, () => {
 });
 
 Given(/^I have previously adjusted my Loan Calculator inputs$/, () => {
-	return true;//not empty
+	cy.SliderClick();
+	cy.EstimateMonthlyPaymentValues();
+	cy.DropdownLoanAdjust();
 });
 
 Then(/^The previously displayed Estimated Monthly Payments has disappeared$/, () => {
-	return true;
+	cy.NotEstimateMonthlyPayment();
 });
 
 When(/^I submit the new inputs$/, () => {
@@ -71,5 +70,4 @@ Then(/^I am shown a new Estimated Monthly Payment$/, () => {
 	cy.EstimateMonthlyPayment();
 	cy.EstimateMonthlyPaymentNewValues();
 	cy.CheckEstimateMonthlyPaymentUpdate();
-	//cy.EstimateMonthlyPaymentValues2(); Develop a different function on this part to get the values and assert that they're different
 });

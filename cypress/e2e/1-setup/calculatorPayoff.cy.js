@@ -30,11 +30,11 @@ Then(/^the calculate button is enabled$/, () => {
 });
 
 When(/^I attempt to enter non-numerical values$/, () => {
-	return true;
+	cy.InputNonNumericalValues();
 });
 
 Then(/^these values are not accepted - they aren't populated in the field$/, () => {
-	return true;
+	cy.InputNotValid();
 });
 
 When(/^I've entered values into Credit Card balance, Interest Rate, and Monthly payments$/, () => {

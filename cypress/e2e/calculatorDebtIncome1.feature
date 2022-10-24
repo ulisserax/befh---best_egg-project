@@ -9,7 +9,7 @@ Background:  Debt to Income
 #======================================================================================================================
 Scenario:  Debt to Income Calculation - Enable Calculate button
 
-    When I enter Annual income (before taxes)
+    When I enter Annual income - before taxes
     And I enter Monthly debt payments
     Then the 'Calculate' button enables
 
@@ -26,7 +26,7 @@ Scenario:  Calculate Debt to Income Ratio
 
     When I submit both Annual income and Monthly debt payments
     Then My debt-to-income ratio is displayed beneath the calculator
-    And The ratio is accurately calculated - e.g. if I say my income is $120,000 and my monthly payments are $1,000, the ratio should be 10%
+    And The ratio is accurately calculated - e.g. if I say my income is 120,000 and my monthly payments are 1,000, the ratio should be 10%
 
     #Debt-to-income ratio = Monthly payments / (Annual income / 12)
 
@@ -46,10 +46,10 @@ Scenario Outline:  Debt-to-income rating
     Then my rating is "<rating>"
 
        Examples:
-        |      annualIncome   |       monthlyDebt       |      rating  |
-        |         1200        |            30           |    Very good |
-        |         1000        |            30           |      Fair    |
-        |         800         |            30           |      Poor    |
+        |      annualIncome   |       monthlyDebt       |      rating                 |
+        |         1200        |            30           |    Your debt is very good!  |
+        |         1000        |            30           |    Your debt is fair.       |
+        |         800         |            30           |    Your debt is poor.       |
 
 
  
