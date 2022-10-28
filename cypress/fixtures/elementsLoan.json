@@ -1,0 +1,9 @@
+{
+    "calculateButton": "button[class='befh-solid-button mt-6']",
+    "estMonthlyPayment": "div[class='dashboard-card mb-0']",
+    "estMonthlyPaymentValues": "div[class='dashboard-card mb-0']>h2[class='font-semibold font-serif tracking-header-rb text-3xl pb-6']",
+    "loan": ".justify-between > :nth-child(1) > .font-medium",
+    "slider": "div.vue-slider-dot",
+    "termButton": "div[class='text-sm']>p[id='choice-years3-arialabel']",
+    "termButtonAdjust": "div[class='text-sm']>p[id='choice-years5-arialabel']"
+}

@@ -1,0 +1,13 @@
+{
+    "alertPayments" : "p[class='text-sm text-red-500 mt-2']",
+    "calculatorButtonPayoff": "button[class='befh-solid-button font-semibold']",
+    "creditCardBalance": "input[id='balance']",
+    "creditCardPayoff": ":nth-child(3) > .font-medium",
+    "dashboardGraphPayoff": "canvas[id='doughnut-chart']",
+    "expectedTablePayoff": "div[class='dashboard-card mb-0 text-sm self-stretch text-befh-rb-gray-900']",
+    "importantTableFields": "div[class='flex justify-between py-2 border-b-2']",
+    "interestRate": "input[id='apr']",
+    "monthlyPayments": "input[id='payment']",
+    "monthlyPaymentTableField": "div[class='flex justify-between py-2']",
+    "totalAmountPaid": "div[class='flex justify-between py-2 font-semibold']"
+}

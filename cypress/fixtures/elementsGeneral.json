@@ -1,0 +1,15 @@
+{
+    "button": "button[type='submit']",
+    "calculators": ":nth-child(7) > .flex > span",
+    "closeGuideline": "button[type='button']",
+    "financialHeader": ":nth-child(4) > .primary-link > span",
+    "iconHamburguer": ".icon-hamburger",
+    "password": "Aftermath1!",
+    "password1": "Twig1234!",
+    "passwordTextField": "input[type='password']",
+    "popupGuideline": "div[class='flex flex-col md:space-y-6']",
+    "signInButton": "a[id='page-continue-button']",
+    "textField": "input[type='text']",
+    "username": "ulisses",
+    "username1": "Chazsbx6"
+}
