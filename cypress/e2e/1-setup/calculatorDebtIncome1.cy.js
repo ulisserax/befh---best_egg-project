@@ -5,12 +5,14 @@ import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
 
 Given(/^I am on the Calculators header page$/, () => {
 	cy.LoginPage();
-	cy.SetUsername();
+    cy.SetUsername();
 	cy.SetPassword();
 	cy.ClickLoginButton();
-	cy.wait(8000).PopupClose();
-	cy.contains('Financial Health').click();
-	cy.contains('Calculators').click();
+    cy.wait(8000).PopupAssert();
+	cy.PopupClose();
+    cy.FinancialHealth();
+    cy.IconHamburguer();
+	cy.Calculators();
 });
 
 Then(/^I have selected the 'Debt to Income' tab$/, () => {

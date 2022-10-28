@@ -51,7 +51,7 @@ module.exports = defineConfig({
   e2e: {
     specPattern: "**/*.feature",
     supportFile: "cypress/support/commands.js",
-    baseUrl: "https://auth.uat.bestegg.com/login",
+    baseUrl: "https://auth.sbx.bestegg.com/login?callback=financial%20health",
     setupNodeEvents,
   },
 });

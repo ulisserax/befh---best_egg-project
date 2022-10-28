@@ -4,22 +4,17 @@ import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
 
 Given(/^I access the BestEgg login page$/, () => {
 	cy.LoginPage();
-	//This is the case to access the users.json file
-	//cy.fixture("users").then((data) => {
-		//this.data = data;
-	//})
-	
 });
 
 When(/^I login on the page$/, () => {
+	//cy.ClickSignInButton();
 	cy.SetUsername();
-	//cy.get('app-username-input-field > .mat-form-field > .mat-form-field-wrapper > .mat-form-field-flex > .mat-form-field-infix').type(this.data.username);
 	cy.SetPassword();
 	cy.ClickLoginButton();
 });
 
 Then(/^I see a popup as a guideline$/, () => {
-	cy.wait(10000).PopupAssert();
+	cy.wait(8000).PopupAssert();
 	cy.PopupClose();
 });
 
@@ -29,16 +24,19 @@ Then(/^I see the homepage$/, () => {
 
 
 Given(/^I am at the Financial Health Page$/, () => {
-	cy.contains('Financial Health').click();
-	//The page asks to signIn again
+	cy.FinancialHealth();
 	cy.wait(5000).ClickSignInButton();
 	cy.SetUsername();
 	cy.SetPassword();
 	cy.ClickLoginButton();
+	cy.wait(6000).PopupClose();
+	
+	
 	
 });
 
 When(/^I click on the Knowledge Center Page$/, () => {
+	cy.IconHamburguer();
 	cy.wait(5000).KnowledgeCenter();
 });
 
