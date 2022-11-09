@@ -1,4 +1,6 @@
-FROM cypress/included:10.8.0
+#(docker hub)
+FROM cypress/included:10.10.0 
+
 # "root"
 RUN whoami
 
@@ -7,6 +9,7 @@ RUN whoami
 RUN mv /root/.cache /home/node/.cache
 
 USER node
+
 # show user effective id and group - it should be non-zero
 # meaning the current user "node" is not root
 RUN id

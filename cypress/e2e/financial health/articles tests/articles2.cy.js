@@ -2,6 +2,11 @@
 
 import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
 
+Cypress.on("uncaught:exception", () => {
+	// returning false here prevents Cypress from
+	// failing the test
+	return false;
+  });
 
 Given(/^i have navigated to a specific article page$/, () => {
 	cy.LoginPage();

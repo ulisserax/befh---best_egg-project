@@ -2,6 +2,12 @@
 
 import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
 
+Cypress.on("uncaught:exception", () => {
+	// returning false here prevents Cypress from
+	// failing the test
+	return false;
+  });
+
 Given(/^I am on the Calculators page$/, () => {
 	cy.LoginPage();
     cy.SetUsername();

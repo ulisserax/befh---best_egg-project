@@ -661,11 +661,11 @@ Cypress.Commands.add('RatioBubbleResult', () =>{
             const textBubble = $span.text().slice(27);
             cy.log(textBubble);
             if (textBubble.trim() === '10%'.trim()){
-                cy.log('The result is 10% !')
+                cy.log('The result is 10% !');
                 expect(true).to.be.true;
             }
             else{
-                cy.log('TEXTS ARE NOT EQUAL!')
+                cy.log('TEXTS ARE NOT EQUAL!');
             }
         })
     })
@@ -714,3 +714,137 @@ Cypress.Commands.add('MonthlyDebtVisible', () =>{
 })
 
 //===============================================================================================================================================
+//Dashboard page
+
+Cypress.Commands.add('DashboardPage', () =>{
+    cy.fixture("elementsDashboard").then((element) => {
+        cy.get(element.dashboard).click();
+    });
+})
+
+Cypress.Commands.add('MyFinancesPage', () =>{
+    cy.fixture("elementsMyFinances").then((element) => {
+        cy.get(element.myFinances).click();
+    });
+})
+
+Cypress.Commands.add('MoneyManagerWindow', () =>{
+    cy.fixture("elementsMyFinances").then((element) => {
+        cy.wait(8000).get(element.moneyManagerWindow).should('be.visible');
+    });
+})
+
+// let accountTitle = 'Weekend spending summary';
+// Cypress.Commands.add('AccountHomepage', () =>{
+//     cy.fixture("elementsMyFinances").then((element) => {
+//         cy.get(element.accountHomepage).find('h2').each(($h2) => {
+//             const wordScrapped = $h2.text();
+//             if (accountTitle.trim() === wordScrapped.trim()){
+//                 cy.log('There is an account registered');
+//                 expect(true).to.be.true;
+//             }
+//             else{
+//                 cy.log('There is no account registered');
+//                 expect(true).to.be.false;
+//             } 
+//         });
+//     });
+// })
+
+Cypress.Commands.add('AccountHomepage', () =>{
+    cy.fixture("elementsMyFinances").then((element) => {
+        cy.get(element.accountHomepage).should('be.visible');
+        //cy.contains('Weekend spending summary');
+    });
+})
+
+Cypress.Commands.add('MyFinancesTab', () =>{
+    cy.fixture("elementsMyFinances").then((element) => {
+        cy.get(element.myFinancesTab).click();
+    });
+})
+
+Cypress.Commands.add('AllAccountsDisplaying', () =>{
+    cy.fixture("elementsMyFinances").then((element) => {
+        //cy.get(element.allAccountsRegistered).should('be.visible');
+        cy.get('iframe').its('0.contentDocument.body').should('be.visible');
+    });
+})
+
+const getIframeDocument = () => {
+    return cy
+    .get('iframe[data-test-id="mx-widget-iframe"]')
+    // Cypress yields jQuery element, which has the real
+    // DOM element under property "0".
+    // From the real DOM iframe element we can get
+    // the "document" element, it is stored in "contentDocument" property
+    // Cypress "its" command can access deep properties using dot notation
+    // https://on.cypress.io/its
+    .its('0.contentDocument').should('exist');
+  }
+  
+const getIframeBody = () => {
+    // get the document
+    return getIframeDocument()
+    // automatically retries until body is loaded
+    .its('body').should('not.be.undefined')
+    // wraps "body" DOM element to allow
+    // chaining more Cypress commands, like ".find(...)"
+    .then(cy.wrap);
+  }
+
+Cypress.Commands.add('AllAccountsClicking', () =>{
+    cy.fixture("elementsMyFinances").then((element) => {
+        //cy.get(element.allAccountsRegistered).should('be.visible');
+        getIframeBody().find('#run-button').should('have.text', 'Try it').click()
+        getIframeBody().find('#result').should('include.text', '"delectus aut autem"')
+    });
+})
+
+Cypress.Commands.add('Insights', () =>{
+    cy.fixture("elementsInsights").then((element) => {
+        cy.get(element.insights).click();
+    });
+})
+
+Cypress.Commands.add('CallToActionVisible', () =>{
+    cy.fixture("elementsInsights").then((element) => {
+        cy.get(element.callToAction).should('be.visible');
+    });
+})
+
+Cypress.Commands.add('LearnMoreClick', () =>{
+    cy.fixture("elementsInsights").then((element) => {
+        cy.get(element.learnMoreButton).should('be.visible').click();
+    });
+})
+
+Cypress.Commands.add('ModalVisible', () =>{
+    cy.fixture("elementsInsights").then((element) => {
+        cy.get(element.modal).should('be.visible');
+    });
+})
+
+Cypress.Commands.add('ClickOutside', () =>{
+    cy.fixture("elementsInsights").then((element) => {
+        cy.get(element.outside).click(0,0);
+    });
+})
+
+Cypress.Commands.add('ClickOkay', () =>{
+    cy.fixture("elementsInsights").then((element) => {
+        cy.get(element.okayButton).click();
+    });
+})
+
+Cypress.Commands.add('ClickClose', () =>{
+    cy.fixture("elementsInsights").then((element) => {
+        cy.get(element.closeButton).click();
+    });
+})
+
+Cypress.Commands.add('ModalNotVisible', () =>{
+    cy.fixture("elementsInsights").then((element) => {
+        cy.get(element.modal).should('not.exist');
+    });
+})
