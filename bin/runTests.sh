@@ -42,11 +42,9 @@ if [[ $1 =~ local|uat|sbx ]]; then
   echo "******************************************************"
   echo ""
   if [[ $interactive == true ]]; then
-    npx cypress open --config-file ./config/${1}.config.js
+    npx cypress open --config-file ./config/"${1}".config.js
   else
-    docker run -it -v $PWD:/code -w /code --entrypoint cypress \
-    cypress/included:10.10.0 run --config-file \
-    /code/config/${1}.config.js
+    docker run -it -v=$PWD:/code -w /code --entrypoint cypress cypress/included:10.10.0 run --config-file /code/config/"${1}".config.js
   fi
   exit
 else
