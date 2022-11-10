@@ -1,6 +1,37 @@
 //===============================================================================================================================================
 //Articles' Page Commands
 
+Cypress.Commands.add("login", (username, password ) => {
+    cy.visit(Cypress.env('loginUrl'))
+    const sessionId = crypto.randomUUID();
+    cy.request({
+        method: 'POST',
+        url: Cypress.env('authUrl'),
+        headers: {
+            'Content-Type': 'application/json',
+            'auth-session-id': sessionId
+        },
+        body:
+          {
+              username: username,
+              password: password
+          }
+    }).then((res) => {
+        sessionStorage.setItem('auth_identity_access_token', res.body.IdToken);
+        sessionStorage.setItem('auth_identity_access_token_age', Date.now().toString())
+        cy.setCookie('X-Access-Token', `Bearer ${res.body.IdToken}`)
+        cy.setCookie('X-Refresh-Token', res.body.RefreshToken)
+        cy.setCookie('auth-session-id', sessionId)
+        cy.setCookie('be-auth', 'Y')
+        cy.setCookie('signin-session-id', crypto.randomUUID())
+        cy.task('getCid', res.body.IdToken).then(cid=>{
+         cy.visit(`${Cypress.env('redirectUrl')}?cid=${cid}`)
+        })
+
+
+    })
+})
+
 Cypress.Commands.add('LoginPage', () =>{
     cy.visit('/');
 })

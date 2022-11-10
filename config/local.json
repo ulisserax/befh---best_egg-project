@@ -1,8 +1,0 @@
-{
-  "e2e": {
-    "baseUrl": "http://localhost:8000/financial-health",
-    "projectId": "",
-    "viewportWidth": 1366,
-    "viewportHeight": 768
-  },
-}
