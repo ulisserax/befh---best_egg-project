@@ -9,15 +9,8 @@ Cypress.on("uncaught:exception", () => {
   });
 
 Given(/^i am on the Knowledge Center page$/, () => {
-	cy.LoginPage();
-    cy.SetUsername();
-	cy.SetPassword();
-	cy.ClickLoginButton();
-    cy.wait(8000).PopupAssert();
-	cy.PopupClose();
-    cy.FinancialHealth();
-    cy.IconHamburguer();
-	cy.wait(5000).KnowledgeCenter();
+	cy.login('jcastaldi', 'Aftermath1!')
+	cy.contains('Knowledge Center').click()
 });
 
 Given(/^i have not entered any text into search$/, () => {
@@ -54,7 +47,7 @@ When(/^i submit text to the search bar$/, () => {
 });
 
 Then(/^i am served articles which match my search$/, () => {
-	cy.ArticlesMatchingSearch();
+	cy.ArticlesMatchingSearch('Credit Card');
 });
 
 Then(/^i can submit a new search$/, () => {
