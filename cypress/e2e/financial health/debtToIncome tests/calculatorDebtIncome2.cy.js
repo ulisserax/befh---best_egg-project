@@ -2,14 +2,22 @@
 
 import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
 
+Cypress.on("uncaught:exception", () => {
+	// returning false here prevents Cypress from
+	// failing the test
+	return false;
+  });
+
 Given(/^I am on the Calculators page$/, () => {
 	cy.LoginPage();
-	cy.SetUsername();
+    cy.SetUsername();
 	cy.SetPassword();
 	cy.ClickLoginButton();
-	cy.wait(8000).PopupClose();
-	cy.contains('Financial Health').click();
-	cy.contains('Calculators').click();
+    cy.wait(8000).PopupAssert();
+	cy.PopupClose();
+    cy.FinancialHealth();
+    cy.IconHamburguer();
+	cy.Calculators();
 });
 
 Then(/^I have switched to the Debt to Debts tab$/, () => {

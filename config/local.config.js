@@ -7,6 +7,7 @@ module.exports = defineConfig({
     specPattern: "**/*.feature",
     supportFile: "cypress/support/commands.js",
     baseUrl: "http://0.0.0.0:8000/",
+    viewportWidth:1200,
     setupNodeEvents,
   },
 });

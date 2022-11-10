@@ -1,0 +1,20 @@
+{
+    "button": "button[type='submit']",
+    "calculators": ":nth-child(7) > .flex > span",
+    "closeGuideline": ".welcome-modal__header > .btn-nude > app-icon-close > .icon-close",
+    "closeGuideline2": "button[type='button']",
+    "financialHeader2": ":nth-child(3) > .primary-nav__link > span",
+    "financialHeader": " :nth-child(4) > .primary-nav__link > span",
+    "iconHamburguer": ".icon-hamburger",
+    "password": "n8NhV1l1vJT4^^",
+    "password1": "Aftermath1!",
+    "password2": "Twig1234!",
+    "passwordTextField": "input[type='password']",
+    "popupGuideline": "#cdk-overlay-0",
+    "popupGuideline2": "div[class='flex flex-col md:space-y-6']",
+    "signInButton": "a[id='page-continue-button']",
+    "textField": "input[type='text']",
+    "username": "tivix3",
+    "username1": "jcastaldi",
+    "username2": "Chazsbx6"
+}

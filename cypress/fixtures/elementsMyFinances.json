@@ -1,0 +1,8 @@
+{
+    "moneyManagerWindow": "#masterWidgetContainer > iframe",
+    "myFinances": ".space-y-6 > :nth-child(2) > .flex > span",
+    "accountHomepage": ".order-3",
+    "accountHomepage2": "div[style='display: flex; justify-content: space-between; align-items: center;']",
+    "myFinancesTab": "button[class='text-sm font-medium mt-5 mb-4 ml-5 text-befh-rb-navy-900 custom-text-shadow']",
+    "allAccountsRegistered": "button[class='fsp7w9x']"
+}

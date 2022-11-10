@@ -7,9 +7,11 @@ Given(/^I am on the calculator's header page$/, () => {
 	cy.SetUsername();
 	cy.SetPassword();
 	cy.ClickLoginButton();
-	cy.wait(8000).PopupClose();
-	cy.contains('Financial Health').click();
-	cy.contains('Calculators').click();
+	cy.wait(8000).PopupAssert();
+	cy.PopupClose();
+	cy.FinancialHealth();
+    cy.IconHamburguer();
+	cy.Calculators();
 });
 
 When(/^I have selected the 'Loan' tab$/, () => {
