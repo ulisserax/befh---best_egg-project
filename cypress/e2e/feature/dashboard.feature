@@ -12,7 +12,7 @@ Background:  Dashboard - First time visitor to MX
 
 Scenario:  Dashboard page
     When I access the dashboard
-    Then I see a call-to-action prompting me to access the My Finances page - "It's easier than ever to manage your money"
+    Then I see a call-to-action prompting me to access the My Finances page - It's easier than ever to manage your money
     And I see a 'NEW' prompt on the My Finances tab
 
 #======================================================================================================================

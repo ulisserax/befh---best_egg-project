@@ -9,16 +9,18 @@ Cypress.on("uncaught:exception", () => {
   });
 
 Given(/^I have not added any accounts to My Finances$/, () => {
-	return true;
+	cy.Login('tivix3', 'n8NhV1l1vJT4^^');
+    cy.NoMXAccount();
 });
 
 When(/^I access the dashboard$/, () => {
-	return true;
+	cy.IconHamburguer();
+    cy.Dashboard();
 });
 
-Then(/^I see a call-to-action prompting me to access the My Finances page - "([^"]*)"$/, (args1) => {
-	console.log(args1);
-	return true;
+Then(/^I see a call-to-action prompting me to access the My Finances page - It's easier than ever to manage your money$/, () => {
+	cy.NoMXAccount();
+	cy.MXText();
 });
 
 Then(/^I see a 'NEW' prompt on the My Finances tab$/, () => {
@@ -26,15 +28,15 @@ Then(/^I see a 'NEW' prompt on the My Finances tab$/, () => {
 });
 
 When(/^I click the 'x' on the CTA$/, () => {
-	return true;
+	cy.DashboardCloseCTA();
 });
 
 Then(/^the CTA disappears$/, () => {
-	return true;
+	cy.MXNotVisible();
 });
 
 When(/^I click 'Let's go'$/, () => {
-	return true;
+	cy.LetsGo();
 });
 
 Then(/^I'm taken to the My Finances page$/, () => {
@@ -42,18 +44,18 @@ Then(/^I'm taken to the My Finances page$/, () => {
 });
 
 When(/^I click the 'Learn More' link on the MX CTA$/, () => {
-	return true;
+	cy.DashboardLearnMoreClick();
 });
 
 Then(/^A modal appears, explaining BEFH's data protection$/, () => {
-	return true;
+	cy.DashboardModalVisible();
 });
 
 Then(/^if I click the 'Okay' button, or the 'X', or outside the modal$/, () => {
-	return true;
+	cy.DashboardClickOkay();
 });
 
 Then(/^it is dismissed$/, () => {
-	return true;
+	cy.DashboardModalNotVisible();
 });
 

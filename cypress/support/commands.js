@@ -1,7 +1,7 @@
 //===============================================================================================================================================
 //General Commands
 
-Cypress.Commands.add("login", (username, password ) => {
+Cypress.Commands.add('Login', (username, password ) => {
     cy.visit(Cypress.env('loginUrl'))
     const sessionId = crypto.randomUUID();
     cy.request({
@@ -881,5 +881,65 @@ Cypress.Commands.add('ClickClose', () =>{
 Cypress.Commands.add('ModalNotVisible', () =>{
     cy.fixture("elementsInsights").then((element) => {
         cy.get(element.modal).should('not.exist');
+    });
+})
+
+Cypress.Commands.add('Dashboard', () =>{
+    cy.fixture("elementsDashboard").then((element) => {
+        cy.get(element.dashboard).click();
+    });
+})
+
+Cypress.Commands.add('NoMXAccount', () =>{
+    cy.fixture("elementsDashboard").then((element) => {
+        cy.get(element.mxCallToAction).should('be.visible');
+    });
+})
+
+Cypress.Commands.add('MXText', () =>{
+    cy.fixture("elementsDashboard").then((element) => {
+        cy.get(element.mxText).should('have.text', " It's easier than ever to manage your money ");
+    });
+})
+
+Cypress.Commands.add('DashboardLearnMoreClick', () =>{
+    cy.fixture("elementsDashboard").then((element) => {
+        cy.get(element.learnMoreButton).should('be.visible').click();
+    });
+})
+
+Cypress.Commands.add('DashboardModalVisible', () =>{
+    cy.fixture("elementsDashboard").then((element) => {
+        cy.get(element.modal).should('be.visible');
+    });
+})
+
+Cypress.Commands.add('DashboardClickOkay', () =>{
+    cy.fixture("elementsDashboard").then((element) => {
+        cy.get(element.okayButton).click();
+    });
+})
+
+Cypress.Commands.add('DashboardModalNotVisible', () =>{
+    cy.fixture("elementsDashboard").then((element) => {
+        cy.get(element.modal).should('not.exist');
+    });
+})
+
+Cypress.Commands.add('DashboardCloseCTA', () =>{
+    cy.fixture("elementsDashboard").then((element) => {
+        cy.get(element.closeCTA).should('be.visible').click();
+    });
+})
+
+Cypress.Commands.add('MXNotVisible', () =>{
+    cy.fixture("elementsDashboard").then((element) => {
+        cy.get(element.mxCallToAction).should('not.exist');
+    });
+})
+
+Cypress.Commands.add('LetsGo', () =>{
+    cy.fixture("elementsDashboard").then((element) => {
+        cy.get(element.letsGoButton).should('be.visible').click();
     });
 })

@@ -6,6 +6,7 @@ const browserify = require("@badeball/cypress-cucumber-preprocessor/browserify")
 const createEsbuildPlugin = require("@badeball/cypress-cucumber-preprocessor/esbuild");
 const createBundler = require("@bahmutov/cypress-esbuild-preprocessor");
 const webpack = require("@cypress/webpack-preprocessor");
+const jwtDecode = require("jwt-decode");
 
 //function getConfigurationByFile(file) {
   //const pathToConfigFile = path.resolve("..", "config", `${file}.json`);
@@ -42,12 +43,22 @@ async function setupNodeEvents(on, config) {
       },
     })
   );
-
+  on('task', {
+    getCid(res) {
+      const token = jwtDecode(res)
+      return token["cid"]
+    }
+  })
   // Make sure to return the config object as it might have been modified by the plugin.
   return config;
 }
 
 module.exports = defineConfig({
+  env: {
+    loginUrl: 'https://twig.uat.bestegg.com/financial-health/auth/login/?next=/financial-health/home/',
+    authUrl: 'https://auth.uat.bestegg.com/auth-identity-service/api/v1/cognito/login',
+    redirectUrl: 'https://www.uat.bestegg.com/financial-health/rf/',
+  },
   e2e: {
     specPattern: "**/*.feature",
     supportFile: "cypress/support/commands.js",

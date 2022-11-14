@@ -9,8 +9,10 @@ Cypress.on("uncaught:exception", () => {
   });
 
 Given(/^i am on the Knowledge Center page$/, () => {
-	cy.login('jcastaldi', 'Aftermath1!')
-	cy.contains('Knowledge Center').click()
+	cy.Login('jcastaldi', 'Aftermath1!')
+	cy.IconHamburguer();
+	cy.KnowledgeCenter();
+	//cy.contains('Knowledge Center').click() it seems that we have to click first on a iconHamburguer and than click on the Knowledge
 });
 
 Given(/^i have not entered any text into search$/, () => {

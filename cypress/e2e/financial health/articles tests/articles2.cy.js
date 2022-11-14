@@ -9,15 +9,9 @@ Cypress.on("uncaught:exception", () => {
   });
 
 Given(/^i have navigated to a specific article page$/, () => {
-	cy.LoginPage();
-    cy.SetUsername();
-	cy.SetPassword();
-	cy.ClickLoginButton();
-    cy.wait(8000).PopupAssert();
-	cy.PopupClose();
-    cy.FinancialHealth();
+	cy.Login('jcastaldi', 'Aftermath1!');
     cy.IconHamburguer();
-	cy.wait(5000).KnowledgeCenter();
+	cy.KnowledgeCenter();
     cy.ArticleClick();
 });
 
