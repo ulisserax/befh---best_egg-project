@@ -943,3 +943,4 @@ Cypress.Commands.add('LetsGo', () =>{
         cy.get(element.letsGoButton).should('be.visible').click();
     });
 })
+

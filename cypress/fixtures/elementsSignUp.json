@@ -1,0 +1,7 @@
+{
+    "confirmPassword": "input[id='id_password2']",
+    "email": "input[id='id_email']",
+    "nextButton": "button[type='submit']",
+    "password": "input[id='id_password1']",
+    "username": "input[id='id_username']"
+}

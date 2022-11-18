@@ -1,7 +1,8 @@
 [
   {
     "id": 1,
-    "name": "Leanne Graham",
+    "firstName": "Leanne",
+    "lastName": "Graham",
     "username": "Bret",
     "email": "Sincere@april.biz",
     "address": {
@@ -25,7 +26,8 @@
   
   {
     "id": 2,
-    "name": "Ervin Howell",
+    "firstName": "Ervin",
+    "lastName": "Howell",
     "username": "Antonette",
     "email": "Shanna@melissa.tv",
     "address": {
@@ -49,7 +51,8 @@
   
   {
     "id": 3,
-    "name": "Clementine Bauch",
+    "firstName": "Clementine",
+    "lastName": "Bauch",
     "username": "Samantha",
     "email": "Nathan@yesenia.net",
     "address": {
@@ -73,7 +76,8 @@
   
   {
     "id": 4,
-    "name": "Patricia Lebsack",
+    "firstName": "Patricia",
+    "lastName": "Lebsack",
     "username": "Karianne",
     "email": "Julianne.OConner@kory.org",
     "address": {
@@ -97,7 +101,8 @@
   
   {
     "id": 5,
-    "name": "Chelsey Dietrich",
+    "firstName": "Chelsey",
+    "lastName": "Dietrich",
     "username": "Kamren",
     "email": "Lucio_Hettinger@annie.ca",
     "address": {
@@ -121,7 +126,8 @@
   
   {
     "id": 6,
-    "name": "Mrs. Dennis Schulist",
+    "firstName": "Dennis",
+    "lastName": "Schulist",
     "username": "Leopoldo_Corkery",
     "email": "Karley_Dach@jasper.info",
     "address": {
@@ -145,7 +151,8 @@
   
   {
     "id": 7,
-    "name": "Kurtis Weissnat",
+    "firstName": "Kurtis",
+    "lastName": "Weissnat",
     "username": "Elwyn.Skiles",
     "email": "Telly.Hoeger@billy.biz",
     "address": {
@@ -169,7 +176,8 @@
   
   {
     "id": 8,
-    "name": "Nicholas Runolfsdottir V",
+    "firstName": "Nicholas",
+    "lastName": "Runolfsdottir V",
     "username": "Maxime_Nienow",
     "email": "Sherwood@rosamond.me",
     "address": {
@@ -193,7 +201,8 @@
   
   {
     "id": 9,
-    "name": "Glenna Reichert",
+    "firstName": "Glenna",
+    "lastName": "Reichert",
     "username": "Delphine",
     "email": "Chaim_McDermott@dana.io",
     "address": {
@@ -217,7 +226,8 @@
   
   {
     "id": 10,
-    "name": "Clementina DuBuque",
+    "firstName": "Clementina",
+    "lastName": "DuBuque",
     "username": "Moriah.Stanton",
     "email": "Rey.Padberg@karina.biz",
     "address": {
