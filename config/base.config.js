@@ -7,7 +7,9 @@ const createEsbuildPlugin = require("@badeball/cypress-cucumber-preprocessor/esb
 const createBundler = require("@bahmutov/cypress-esbuild-preprocessor");
 const webpack = require("@cypress/webpack-preprocessor");
 const jwtDecode = require("jwt-decode");
-
+const MailosaurClient = require('mailosaur')
+const uuid = require('uuid')
+const generator = require('generate-password')
 
 async function setupNodeEvents(on, config) {
   // This is required for the preprocessor to be able to generate JSON reports after each run, and more,
@@ -43,7 +45,31 @@ async function setupNodeEvents(on, config) {
     getCid(res) {
       const token = jwtDecode(res)
       return token["cid"]
+    },
+    async getConfirmationCode(email) {
+      const testStart = new Date(Date.now() - 10000)
+      const apiKey = 'DPFIQQW8OXFAqL0g'
+      const serverId = 'zpcr9khc'
+      const mailosaur = new MailosaurClient(apiKey)
+      const criteria = {
+        sentTo: email,
+      }
+      const message = await mailosaur.messages.get(serverId, criteria, {
+        receivedAfter: testStart
+      })
+      const code = message.html.codes[0].value;
+      return code
+    },
+    generatePassword() {
+      const password = generator.generate({
+        length:10,
+        numbers: true,
+        symbols: true,
+        strict: true
+      })
+      return password
     }
+
   })
   // Make sure to return the config object as it might have been modified by the plugin.
   return config;

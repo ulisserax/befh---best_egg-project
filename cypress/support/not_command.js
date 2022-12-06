@@ -1,168 +1,168 @@
 //===============================================================================================================================================
 //General Commands
 
-// Cypress.Commands.add('Login', (username, password) => {
-//     cy.visit(Cypress.env('loginUrl'))
-//     const sessionId = crypto.randomUUID();
-//     //const password = Cypress.env('testPassword');
-//     cy.request({
-//         method: 'POST',
-//         url: Cypress.env('authUrl'),
-//         headers: {
-//             'Content-Type': 'application/json',
-//             'auth-session-id': sessionId
-//         },
-//         body:
-//           {
-//               username: username,
-//               password: password
-//           }
-//     }).then((res) => {
-//         sessionStorage.setItem('auth_identity_access_token', res.body.IdToken);
-//         sessionStorage.setItem('auth_identity_access_token_age', Date.now().toString())
-//         cy.setCookie('X-Access-Token', `Bearer ${res.body.IdToken}`)
-//         cy.setCookie('X-Refresh-Token', res.body.RefreshToken)
-//         cy.setCookie('auth-session-id', sessionId)
-//         cy.setCookie('be-auth', 'Y')
-//         cy.setCookie('signin-session-id', crypto.randomUUID())
-//         cy.task('getCid', res.body.IdToken).then(cid=>{cy.visit(`${Cypress.env('redirectUrl')}?cid=${cid}`)
-//     })
-//   })
-// })
+Cypress.Commands.add('Login', (username) => {
+    cy.visit(Cypress.env('loginUrl'))
+    const sessionId = crypto.randomUUID();
+    const password = Cypress.env('testPassword');
+    cy.request({
+        method: 'POST',
+        url: Cypress.env('authUrl'),
+        headers: {
+            'Content-Type': 'application/json',
+            'auth-session-id': sessionId
+        },
+        body:
+          {
+              "username": username,
+              "password": password
+          }
+    }).then((res) => {
+        sessionStorage.setItem('auth_identity_access_token', res.body.IdToken);
+        sessionStorage.setItem('auth_identity_access_token_age', Date.now().toString())
+        cy.setCookie('X-Access-Token', `Bearer ${res.body.IdToken}`)
+        cy.setCookie('X-Refresh-Token', res.body.RefreshToken)
+        cy.setCookie('auth-session-id', sessionId)
+        cy.setCookie('be-auth', 'Y')
+        cy.setCookie('signin-session-id', crypto.randomUUID())
+        cy.task('getCid', res.body.IdToken).then(cid=>{cy.visit(`${Cypress.env('redirectUrl')}?cid=${cid}`)
+    })
+  })
+})
 
-// Cypress.Commands.add('GetCid', (username)=>{
-//   Cypress.env('sessionId', crypto.randomUUID());
-//   Cypress.env('username', username)
-//     const email = `${username}@zpcr9khc.mailosaur.net`
-//   Cypress.env('email', email)
-//     const cidURL = "https://cid.uat.bestegg.com/Customer/AssignCid";
-//     const casInfo = {
-//       "domainIds": {
-//         "test-befh1": "001"
-//       },
-//       "domainIdType": "test-befh1",
-//       "domainName": "test-befh1",
-//       "user": "test-befh1",
-//       "customerData": {
-//         "emailAddress": email,
-//         "isPhonyEmail": true,
-//         "firstName": "Carletta",
-//         "middleName": "",
-//         "lastName": "Fzldx",
-//         "dateOfBirth": "1995-12-28",
-//         "socialSecurityNumber": "666677368",
-//         "homePhone": "112-333-4444",
-//         "mobilePhone": "112-333-4444",
-//         "address": "530 ANTWERP AV",
-//         "state": "AL",
-//         "city": "BIRMINGHAM",
-//         "zipCode": "35212",
-//         "physicalAddress": "530 ANTWERP AV",
-//         "physicalState": "AL",
-//         "physicalCity": "BIRMINGHAM",
-//         "physicalZipCode": "35212"
-//       }
-//     }
-//     cy.request({
-//         method: 'POST',
-//         url: cidURL,
-//         headers: {
-//             'Content-Type': 'application/json',
-//             'auth-session-id': Cypress.env('sessionId')
-//         },
-//         body: casInfo
-//     }).then((res)=>{
-//       Cypress.env('cid', res.body.cid)
-//       cy.wrap(res).as('cidResponse')
-//     })
+Cypress.Commands.add('GetCid', (username)=>{
+  Cypress.env('sessionId', crypto.randomUUID());
+  Cypress.env('username', username)
+    const email = `${username}@zpcr9khc.mailosaur.net`
+  Cypress.env('email', email)
+    const cidURL = "https://cid.uat.bestegg.com/Customer/AssignCid";
+    const casInfo = {
+      "domainIds": {
+        "test-befh1": "001"
+      },
+      "domainIdType": "test-befh1",
+      "domainName": "test-befh1",
+      "user": "test-befh1",
+      "customerData": {
+        "emailAddress": email,
+        "isPhonyEmail": true,
+        "firstName": "Carletta",
+        "middleName": "",
+        "lastName": "Fzldx",
+        "dateOfBirth": "1995-12-28",
+        "socialSecurityNumber": "666677368",
+        "homePhone": "112-333-4444",
+        "mobilePhone": "112-333-4444",
+        "address": "530 ANTWERP AV",
+        "state": "AL",
+        "city": "BIRMINGHAM",
+        "zipCode": "35212",
+        "physicalAddress": "530 ANTWERP AV",
+        "physicalState": "AL",
+        "physicalCity": "BIRMINGHAM",
+        "physicalZipCode": "35212"
+      }
+    }
+    cy.request({
+        method: 'POST',
+        url: cidURL,
+        headers: {
+            'Content-Type': 'application/json',
+            'auth-session-id': Cypress.env('sessionId')
+        },
+        body: casInfo
+    }).then((res)=>{
+      Cypress.env('cid', res.body.cid)
+      cy.wrap(res).as('cidResponse')
+    })
 
-// })
-// // this needs to be put into a task in setupNodeEvents...
-// Cypress.Commands.add('GetAuthToken', ()=>{
-//   // const preRegURL = "https://auth.uat.bestegg.com/auth-identity-service/api/v2/registration/preregistration/generate-cid-token/"
-//   const idCredentials = `${Cypress.env('authClientId')}:${Cypress.env('authClientSecret')}`
-//   const authToken = btoa(idCredentials)
-//   cy.request({
-//     method: 'POST',
-//     form: true,
-//     url: Cypress.env('authTokenUrl'),
-//     headers: {
-//       'Authorization': `Basic ${authToken}`,
-//       'Content-Type': 'application/x-www-form-urlencoded',
-//       'Cookie': `XSRF-TOKEN=${Cypress.env('xsrfToken')}`
-//     },
-//     body: {
-//       "grant_type": "client_credentials",
-//       "client_id": Cypress.env('authClientId')
-//     }
-//   }).then((res)=>{
-//     Cypress.env('authTokenResponse', res.body.access_token)
-//   })
-// })
-// Cypress.Commands.add('GetCidToken', ()=>{
-//   const preRegURL = "https://auth.uat.bestegg.com/auth-identity-service/api/v2/registration/preregistration/generate-cid-token/"
-//   cy.request({
-//     method: 'GET',
-//     url: preRegURL + Cypress.env('cid'),
-//     headers: {
-//           'Authorization': `Bearer ${Cypress.env('authTokenResponse')}`
-//     },
-//   }).then((res)=>{
-//     Cypress.env('token', res.body)
-//   })
-// })
-// Cypress.Commands.add('CreatePassword', ()=>{
-//       cy.task('generatePassword').then((pw)=> {
-//         Cypress.env('testPassword', pw)
-//       })
-// })
-// Cypress.Commands.add('SignUp', ()=>{
-//       const signupURL = "https://auth.uat.bestegg.com/auth-identity-service/api/v1/cognito/signup";
-//           const signUpInfo = {
-//             "contactMethod": {
-//               "type": "email",
-//               "value": Cypress.env('email')
-//             },
-//             "isDisclosureChecked": true,
-//             "password": Cypress.env('testPassword'),
-//             "token": Cypress.env('token'),
-//             "username": Cypress.env('username')
-//           }
+})
+// this needs to be put into a task in setupNodeEvents...
+Cypress.Commands.add('GetAuthToken', ()=>{
+  // const preRegURL = "https://auth.uat.bestegg.com/auth-identity-service/api/v2/registration/preregistration/generate-cid-token/"
+  const idCredentials = `${Cypress.env('authClientId')}:${Cypress.env('authClientSecret')}`
+  const authToken = btoa(idCredentials)
+  cy.request({
+    method: 'POST',
+    form: true,
+    url: Cypress.env('authTokenUrl'),
+    headers: {
+      'Authorization': `Basic ${authToken}`,
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Cookie': `XSRF-TOKEN=${Cypress.env('xsrfToken')}`
+    },
+    body: {
+      "grant_type": "client_credentials",
+      "client_id": Cypress.env('authClientId')
+    }
+  }).then((res)=>{
+    Cypress.env('authTokenResponse', res.body.access_token)
+  })
+})
+Cypress.Commands.add('GetCidToken', ()=>{
+  const preRegURL = "https://auth.uat.bestegg.com/auth-identity-service/api/v2/registration/preregistration/generate-cid-token/"
+  cy.request({
+    method: 'GET',
+    url: preRegURL + Cypress.env('cid'),
+    headers: {
+          'Authorization': `Bearer ${Cypress.env('authTokenResponse')}`
+    },
+  }).then((res)=>{
+    Cypress.env('token', res.body)
+  })
+})
+Cypress.Commands.add('CreatePassword', ()=>{
+      cy.task('generatePassword').then((pw)=> {
+        Cypress.env('testPassword', pw)
+      })
+})
+Cypress.Commands.add('SignUp', ()=>{
+      const signupURL = "https://auth.uat.bestegg.com/auth-identity-service/api/v1/cognito/signup";
+          const signUpInfo = {
+            "contactMethod": {
+              "type": "email",
+              "value": Cypress.env('email')
+            },
+            "isDisclosureChecked": true,
+            "password": Cypress.env('testPassword'),
+            "token": Cypress.env('token'),
+            "username": Cypress.env('username')
+          }
 
-//           cy.request({
-//             method: 'POST',
-//             url: signupURL,
-//             headers: {
-//             'Content-Type': 'application/json',
-//             'auth-session-id': Cypress.env('sessionId')
-//             },
-//           body: signUpInfo
+          cy.request({
+            method: 'POST',
+            url: signupURL,
+            headers: {
+            'Content-Type': 'application/json',
+            'auth-session-id': Cypress.env('sessionId')
+            },
+          body: signUpInfo
 
-//         }).then((res)=>{
-//           const code = cy.task('getConfirmationCode', Cypress.env('email')).then((code)=>{
-//             Cypress.env('code', code)
-//           })
-//         })
-// })
+        }).then((res)=>{
+          const code = cy.task('getConfirmationCode', Cypress.env('email')).then((code)=>{
+            Cypress.env('code', code)
+          })
+        })
+})
 
-// Cypress.Commands.add('OtpLogin', ()=>{
-//               const otpInfo = {
-//             "username": Cypress.env('username'),
-//             "password": Cypress.env('testPassword'),
-//             "confirmationCode": Cypress.env('code'),
-//             "confirmationSource": "email"
-//           }
+Cypress.Commands.add('OtpLogin', ()=>{
+              const otpInfo = {
+            "username": Cypress.env('username'),
+            "password": Cypress.env('testPassword'),
+            "confirmationCode": Cypress.env('code'),
+            "confirmationSource": "email"
+          }
 
-//    cy.request({
-//             method: 'POST',
-//             url: Cypress.env('baseUrl') + '/api/v1/cognito/login-with-otp',
-//             body:  otpInfo,
-//             headers: {
-//               'Content-Type': 'application/json',
-//               'auth-session-id': Cypress.env('sessionId')
-//             }
-//           })
-// })
+   cy.request({
+            method: 'POST',
+            url: Cypress.env('baseUrl') + '/api/v1/cognito/login-with-otp',
+            body:  otpInfo,
+            headers: {
+              'Content-Type': 'application/json',
+              'auth-session-id': Cypress.env('sessionId')
+            }
+          })
+})
 
 Cypress.Commands.add('LoginPage', () =>{
     cy.visit('/');
@@ -1093,75 +1093,4 @@ Cypress.Commands.add('LetsGo', () =>{
         cy.get(element.letsGoButton).should('be.visible').click();
     });
 })
-
-Cypress.Commands.add('CreateUser', () =>{
-    cy.fixture("elementsSignUp").then((element) => {
-        cy.get(element.username).should('be.visible').type('nameTester');
-        cy.get(element.email).should('be.visible').type('name_tester@tivix.com');
-        cy.get(element.password).should('be.visible').type('Name_tester123#');
-        cy.get(element.confirmPassword).should('be.visible').type('Name_tester123#');
-    });
-})
-
-Cypress.Commands.add('PossibleUser', () =>{
-    cy.fixture("elementsSignUp").then((element) => {
-        cy.get(element.labelGreen).should('be.visible');
-        cy.get(element.nextButton).click();
-    });
-})
-
-Cypress.Commands.add('MoreUserData', () =>{
-    cy.fixture("elementsSignUp").then((element) => {
-        cy.get(element.firstNameData).should('be.visible').type('nameTester');
-        cy.get(element.lastNameData).should('be.visible').type('testingCypress');
-        cy.get(element.address).should('be.visible').type('Miami Road');
-        cy.get(element.city).should('be.visible').type('Orlando');
-        cy.get(element.zipCode).should('be.visible').type('32825');
-        cy.get("select").select("Florida").invoke("val").should("eq", "FL");
-        cy.get(element.dateOfBirth).should('be.visible').type('08031991');
-        cy.get(element.phoneNumber).should('be.visible').type('6465780322');
-    });
-})
-
-Cypress.Commands.add('ClearField', () =>{
-    cy.fixture("elementsSignUp").then((element) => {
-        cy.get(element.address).clear();
-        cy.get(element.city).clear();
-        cy.get(element.zipCode).clear();
-    });
-})
-
-Cypress.Commands.add('ContainerVisible', () =>{
-    cy.fixture("elementsSignUp").then((element) => {
-        cy.get('.pac-container', {timeout: 10_000}).should('be.visible');
-    });
-})
-
-Cypress.Commands.add('AddressChoice', () =>{
-    cy.fixture("elementsSignUp").then((element) => {
-        const arrows = '{downArrow}'.repeat(4);
-        cy.get(element.address).type(arrows).type('{enter}');
-    });
-})
-
-Cypress.Commands.add('EnterAddress', () =>{
-    cy.fixture("elementsSignUp").then((element) => {
-        cy.get(element.address).should('be.visible').type('North');
-    });
-})
-
-Cypress.Commands.add('CreateAccount', () =>{
-    cy.fixture("elementsSignUp").then((element) => {
-        cy.get(element.nextButton).click();
-    });
-})
-
-Cypress.Commands.add('TwoStepAuthentication', () =>{
-    cy.request('https://receive-smss.com/sms/16465780322/')
-        .then(html => {
-            const optLine = html.body.match(/.*Best Egg.*/);
-            console.log(optLine);
-        })
-})
-
 

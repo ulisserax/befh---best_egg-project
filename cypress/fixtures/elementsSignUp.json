@@ -1,7 +1,17 @@
 {
+    "address": "input[type='address']",
+    "city": "input[name='city']",
     "confirmPassword": "input[id='id_password2']",
+    "dateOfBirth": "input[id='id_dob']",
     "email": "input[id='id_email']",
+    "firstName": "input[id='id_first_name']",
+    "firstNameData": "input[name='first_name']",
+    "labelGreen": "label[class='input-label-text text-befh-rb-green-800']",
+    "lastName": "input[id='id_last_name']",
+    "lastNameData": "input[name='last_name']",
     "nextButton": "button[type='submit']",
     "password": "input[id='id_password1']",
-    "username": "input[id='id_username']"
+    "phoneNumber": "input[id='id_phone_number']",
+    "username": "input[id='id_username']",
+    "zipCode": "input[id='id_zip_code']"
 }

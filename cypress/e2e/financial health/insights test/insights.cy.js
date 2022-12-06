@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
+import { Given, When, Then, Before } from '@badeball/cypress-cucumber-preprocessor';
 
 Cypress.on("uncaught:exception", () => {
 	// returning false here prevents Cypress from
@@ -8,20 +8,26 @@ Cypress.on("uncaught:exception", () => {
 	return false;
   });
 
+// After ( () => {
+// 	cy.request('https://twig.sbx.bestegg.com/financial-health/api/reset-user/');
+// })
+
 Given(/^i have not added accounts to My Finances$/, () => {
+	//cy.Login('tivix3', 'n8NhV1l1vJT4^^')
 	cy.LoginPage();
+	cy.contains('Sign in').click();
+	cy.contains('Sign in with your Best Egg login').click();
+	//cy.ClickSignInButton();
     cy.SetUsername();
 	cy.SetPassword();
 	cy.ClickLoginButton();
-    cy.wait(8000).PopupAssert();
-	cy.PopupClose();
-    cy.FinancialHealth();
-    cy.IconHamburguer();
-    cy.MyFinancesPage();
-    cy.MoneyManagerWindow();
+	cy.request(Cypress.config("baseUrl")).as("homeResponse");
+	cy.get('@homeResponse').its('status').should('eq', 200);
+    cy.PopupAssert();
 });
 
 When(/^i access the insights page$/, () => {
+	cy.PopupClose();
 	cy.IconHamburguer();
 	cy.Insights();
 });
@@ -31,22 +37,29 @@ Then(/^i see a call-to-action for the My Finances page$/, () => {
 });
 
 When(/^i click the 'x' on the CTA$/, () => {
-	return true;
+	cy.PopupClose();
+	cy.IconHamburguer();
+	cy.Insights();
+	cy.ClickCloseCTA();
 });
 
 Then(/^the CTA is dismissed$/, () => {
-	return true;
+	cy.CallToActionNotVisible();
 });
 
 When(/^i click 'Let's go'$/, () => {
-	return true;
+	cy.PopupClose();
+	cy.IconHamburguer();
+	cy.Insights();
+	cy.ClickLetsGo();
 });
 
 Then(/^i'm taken to the My Finances page$/, () => {
-	return true;
+	cy.contains('My Finances');
 });
 
 When(/^i click the 'Learn More' link on the MX CTA$/, () => {
+	cy.PopupClose();
 	cy.IconHamburguer();
 	cy.Insights();
 	cy.LearnMoreClick();

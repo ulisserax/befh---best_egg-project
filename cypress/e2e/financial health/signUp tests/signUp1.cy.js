@@ -9,51 +9,53 @@ Cypress.on("uncaught:exception", () => {
   });
 
 Given(/^I am on the signup page$/, () => {
-	return true;
+	cy.LoginPage();
+	cy.contains('Get started').click();
 });
 
 When(/^I submit my username, email and password$/, () => {
-	return true;
+	cy.CreateUser();
 });
 
 When(/^my email isn't already registered with BEFH$/, () => {
-	return true;
+	cy.PossibleUser();
 });
 
-Then(/^I am taken to the "([^"]*)" page$/, (args1) => {
-	console.log(args1);
-	return true;
+Then(/^I am taken to the 'Tell us about yourself' page$/, () => {
+	cy.contains('Tell us about yourself').should('be.visible');
 });
 
 Given(/^I have filled in all required fields - first name, last name, address 1, city, state, zip code, date of birth$/, () => {
-	return true;
+	cy.MoreUserData();
 });
 
 When(/^I click Create Account$/, () => {
-	return true;
+	cy.wait(1_000_000);
+	//cy.CreateAccount();
 });
 
 Then(/^I am taken to the Verification code page$/, () => {
+	cy.TwoStepAuthentication();
 	return true;
 });
 
 Given(/^I have not filled in the address field$/, () => {
-	return true;
+	cy.ClearField();
 });
 
 When(/^I enter a valid address into this field$/, () => {
-	return true;
+	cy.EnterAddress();
 });
 
 Then(/^a suggested address will appear$/, () => {
-	return true;
+	cy.ContainerVisible();
 });
 
 Then(/^clicking this address will populate the related fields, e.g. City, State, Zip code$/, () => {
-	return true;
+	cy.AddressChoice();
 });
 
-Given(/^I have not filed in a required field$/, () => {
+Given(/^I have not filled in a required field$/, () => {
 	return true;
 });
 
@@ -80,4 +82,3 @@ When(/^I submit the code$/, () => {
 Then(/^I am taken to the start of the financial health survey$/, () => {
 	return true;
 });
-

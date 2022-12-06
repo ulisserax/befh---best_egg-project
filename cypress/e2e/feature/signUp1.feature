@@ -6,7 +6,7 @@ Scenario:  Signup - User info
     Given I am on the signup page
     When I submit my username, email and password
     And my email isn't already registered with BEFH
-    Then I am taken to the "Tell us about yourself" page
+    Then I am taken to the 'Tell us about yourself' page
 
 Scenario:  Signup - Tell us about yourself
     Given I have filled in all required fields - first name, last name, address 1, city, state, zip code, date of birth
@@ -20,7 +20,7 @@ Scenario:  Tell us about yourself, address auto-populate
     And clicking this address will populate the related fields, e.g. City, State, Zip code
 
 Scenario:  Tell us about yourself, incomplete form
-    Given I have not filed in a required field
+    Given I have not filled in a required field
     When I try to submit the form
     Then A warning message appears over the missing field
 

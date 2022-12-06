@@ -103,3 +103,8 @@ dist
 # TernJS port file
 .tern-port
 .idea
+
+/.DS_Store
+# cypress folders
+cypress/screenshots
+cypress/videos

@@ -27,7 +27,7 @@ Scenario:  Get Started
     Then i'm taken to the My Finances page
 
 #======================================================================================================================
-
+@focus
 Scenario:  Learn More
     When i click the 'Learn More' link on the MX CTA
     Then a modal appears, explaining BEFH's data protection

@@ -8,8 +8,19 @@ Cypress.on("uncaught:exception", () => {
 	return false;
   });
 
+//   before(()=>{
+// 	cy.CreatePassword()
+// 	cy.GetCid("cypressTestUatUserBEFH01")
+// 	cy.GetAuthToken()
+// 	cy.GetCidToken()
+// 	cy.SignUp()
+// 	cy.OtpLogin()
+
+// })
+  
 Given(/^i am on the Knowledge Center page$/, () => {
-	cy.Login('jcastaldi', 'Aftermath1!')
+	//cy.Login('jcastaldi', 'Aftermath1!')
+	cy.Login('testUser1122332')
 	cy.IconHamburguer();
 	cy.KnowledgeCenter();
 	//cy.contains('Knowledge Center').click() it seems that we have to click first on a iconHamburguer and than click on the Knowledge
