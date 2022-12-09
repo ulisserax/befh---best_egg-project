@@ -9,7 +9,7 @@ Cypress.on("uncaught:exception", () => {
   });
 
 // afterEach( () => {
-// 	cy.request('https://twig.sbx.bestegg.com/financial-health/api/reset-user/');
+//  	cy.request('https://twig.sbx.bestegg.com/financial-health/api/reset-user/');
 // })
 
 Given(/^I have not added any accounts to My Finances$/, () => {

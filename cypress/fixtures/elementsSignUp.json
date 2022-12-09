@@ -1,5 +1,6 @@
 {
     "address": "input[type='address']",
+    "addressVerificationField":"#autocompleteField",
     "city": "input[name='city']",
     "confirmPassword": "input[id='id_password2']",
     "dateOfBirth": "input[id='id_dob']",

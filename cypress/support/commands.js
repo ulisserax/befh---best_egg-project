@@ -881,7 +881,7 @@ Cypress.Commands.add('MonthlyDebtVisible', () =>{
 })
 
 //===============================================================================================================================================
-//Dashboard page
+//MyFinances
 
 Cypress.Commands.add('DashboardPage', () =>{
     cy.fixture("elementsDashboard").then((element) => {
@@ -968,6 +968,9 @@ Cypress.Commands.add('AllAccountsClicking', () =>{
     });
 })
 
+//===============================================================================================================================================
+//Insights
+
 Cypress.Commands.add('Insights', () =>{
     cy.fixture("elementsInsights").then((element) => {
         cy.get(element.insights).click();
@@ -1034,6 +1037,9 @@ Cypress.Commands.add('ModalNotVisible', () =>{
     });
 })
 
+//===============================================================================================================================================
+//Dashboard
+
 Cypress.Commands.add('Dashboard', () =>{
     cy.fixture("elementsDashboard").then((element) => {
         cy.get(element.dashboard).click();
@@ -1094,32 +1100,68 @@ Cypress.Commands.add('LetsGo', () =>{
     });
 })
 
+//===============================================================================================================================================
+//SignUp - (Get Started Page)
+
+let cookie
 Cypress.Commands.add('CreateUser', () =>{
     cy.fixture("elementsSignUp").then((element) => {
-        cy.get(element.username).should('be.visible').type('nameTester');
-        cy.get(element.email).should('be.visible').type('name_tester@tivix.com');
+        cy.get(element.username).should('be.visible').type('nameTester10');
+        cy.get(element.email).should('be.visible').type('name_tester10@tivix.com');
         cy.get(element.password).should('be.visible').type('Name_tester123#');
         cy.get(element.confirmPassword).should('be.visible').type('Name_tester123#');
+        cy.getCookie('bech-csrftoken-sbx')
+            .should('exist')
+            .then((c) => {
+                // save cookie until we need it
+                cookie = c
+	        })
     });
 })
 
 Cypress.Commands.add('PossibleUser', () =>{
     cy.fixture("elementsSignUp").then((element) => {
         cy.get(element.labelGreen).should('be.visible');
-        cy.get(element.nextButton).click();
+        cy.get(element.nextButton)
+            .click()
+            .then(() => {
+                cy.request({
+                    url: 'https://twig.sbx.bestegg.com/financial-health/auth/signup/info/',
+                }).then(() => {
+                    cy.setCookie('bech-csrftoken-sbx', cookie.value);
+                });
+                
+             })
+    });
+})
+
+Cypress.Commands.add('UserData', () =>{
+    cy.fixture("elementsSignUp").then((element) => {
+        cy.get(element.firstNameData).should('be.visible').type('nameTester10');
+        cy.get(element.lastNameData).should('be.visible').type('testingCypress10');
     });
 })
 
 Cypress.Commands.add('MoreUserData', () =>{
     cy.fixture("elementsSignUp").then((element) => {
-        cy.get(element.firstNameData).should('be.visible').type('nameTester');
-        cy.get(element.lastNameData).should('be.visible').type('testingCypress');
+        cy.get(element.firstNameData).should('be.visible').type('nameTester10');
+        cy.get(element.lastNameData).should('be.visible').type('testingCypress10');
         cy.get(element.address).should('be.visible').type('Miami Road');
         cy.get(element.city).should('be.visible').type('Orlando');
         cy.get(element.zipCode).should('be.visible').type('32825');
         cy.get("select").select("Florida").invoke("val").should("eq", "FL");
         cy.get(element.dateOfBirth).should('be.visible').type('08031991');
-        cy.get(element.phoneNumber).should('be.visible').type('6465780322');
+        cy.get(element.phoneNumber)
+            .should('be.visible')
+            .type('6465780322')
+            .then(() => {
+                cy.request({
+                    url: 'https://twig.sbx.bestegg.com/financial-health/auth/signup/info/',
+                }).then(() => {
+                    cy.setCookie('bech-csrftoken-sbx', cookie.value);
+                });
+                
+             })
     });
 })
 
@@ -1128,6 +1170,13 @@ Cypress.Commands.add('ClearField', () =>{
         cy.get(element.address).clear();
         cy.get(element.city).clear();
         cy.get(element.zipCode).clear();
+    });
+})
+
+Cypress.Commands.add('ClearNameField', () =>{
+    cy.fixture("elementsSignUp").then((element) => {
+        cy.get(element.firstNameData).clear();
+        cy.get(element.lastNameData).clear();
     });
 })
 
@@ -1152,16 +1201,35 @@ Cypress.Commands.add('EnterAddress', () =>{
 
 Cypress.Commands.add('CreateAccount', () =>{
     cy.fixture("elementsSignUp").then((element) => {
-        cy.get(element.nextButton).click();
+        cy.get(element.nextButton)
+            .click()
+            .then(() => {
+                cy.request({
+                    url: 'https://twig.sbx.bestegg.com/financial-health/auth/signup/info/',
+                }).then(() => {
+                    cy.setCookie('bech-csrftoken-sbx', cookie.value);
+                });
+                
+             })
     });
 })
 
 Cypress.Commands.add('TwoStepAuthentication', () =>{
+    cy.wait(10_000);
     cy.request('https://receive-smss.com/sms/16465780322/')
         .then(html => {
-            const optLine = html.body.match(/.*Best Egg.*/);
-            console.log(optLine);
+            const otpLine = html.body.match(/.*Best Egg.*/);
+            const boldText = otpLine[0].match(/<b>\d+/);
+            return boldText[0].match(/\d+/)[0];
+        }).then(otp =>{
+            cy.get('#id_verification_code').type(otp);
         })
 })
 
-
+Cypress.Commands.add('WarningMessage', () =>{
+    cy.fixture("elementsSignUp").then((element) => {
+        cy.get(element.addressVerificationField)
+  		    .invoke('prop', 'validationMessage')
+  		    .should('equal', 'Please fill out this field.');
+    });
+})

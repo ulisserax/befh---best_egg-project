@@ -5561,15 +5561,20 @@
     "minimist" "^1.2.5"
     "through" "^2.3.8"
 
+"cypress-localstorage-commands@^2.2.2":
+  "integrity" "sha512-mONoaxoMAFOSsF+SIDx30hysD3XOY8kPLxjtORdZWDj3sJs+u03XOddTDETPIbLch0DWy5Dtyw1ou3EsFGYZAQ=="
+  "resolved" "https://registry.npmjs.org/cypress-localstorage-commands/-/cypress-localstorage-commands-2.2.2.tgz"
+  "version" "2.2.2"
+
 "cypress-mailosaur@^2.13.0":
   "integrity" "sha512-xdv2994VkGH79Ag+OY2V1Tkr9Uy9p5wE+3u+SB6nnJEvEDIT5cVPsxVJxr91THwR34NWoS3zQBt5ai5ZVZ/1/w=="
   "resolved" "https://registry.npmjs.org/cypress-mailosaur/-/cypress-mailosaur-2.13.0.tgz"
   "version" "2.13.0"
 
-"cypress@*", "cypress@^12.0.0", "cypress@^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0", "cypress@>= 2.1.0":
-  "integrity" "sha512-hX/UeaKrL4uiRxJh+eX9t5YFXJconJyqG0hkFkK6CG+4xj2mMmzvJERF3e2h/9TzvLxPAkQ6cGz8eaHfJZeyGg=="
-  "resolved" "https://registry.npmjs.org/cypress/-/cypress-12.0.0.tgz"
-  "version" "12.0.0"
+"cypress@*", "cypress@^10.11.0", "cypress@^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0", "cypress@>= 2.1.0", "cypress@>=2.1.0":
+  "integrity" "sha512-lsaE7dprw5DoXM00skni6W5ElVVLGAdRUUdZjX2dYsGjbY/QnpzWZ95Zom1mkGg0hAaO/QVTZoFVS7Jgr/GUPA=="
+  "resolved" "https://registry.npmjs.org/cypress/-/cypress-10.11.0.tgz"
+  "version" "10.11.0"
   dependencies:
     "@cypress/request" "^2.88.10"
     "@cypress/xvfb" "^1.2.4"
