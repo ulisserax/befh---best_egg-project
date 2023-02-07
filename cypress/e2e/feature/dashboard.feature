@@ -21,7 +21,7 @@ Scenario:  Dismissing the My Finances (MX) call-to-action (CTA)
     When I click the 'x' on the CTA
     Then the CTA disappears
 
-#======================================================================================================================
+#======================================================================================================================@focus
 @focus
 Scenario:  Get Started
     When I click 'Let's go'

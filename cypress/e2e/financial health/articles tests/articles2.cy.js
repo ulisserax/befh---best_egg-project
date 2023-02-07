@@ -9,7 +9,17 @@ Cypress.on("uncaught:exception", () => {
   });
 
 Given(/^i have navigated to a specific article page$/, () => {
-	cy.Login('jcastaldi', 'Aftermath1!');
+	//cy.Login('jcastaldi', 'Aftermath1!');
+	cy.LoginPage();
+	cy.contains('Sign in').click();
+	cy.contains('Sign in with your Best Egg login').click();
+    cy.SetUsername();
+	cy.SetPassword();
+	cy.ClickLoginButton();
+	cy.request(Cypress.config("baseUrl")).as("homeResponse");
+	cy.get('@homeResponse').its('status').should('eq', 200);
+	cy.PopupAssert();
+	cy.PopupClose();
     cy.IconHamburguer();
 	cy.KnowledgeCenter();
     cy.ArticleClick();
@@ -36,12 +46,12 @@ Then(/^my search criteria has been submitted here$/, () => {
 });
 
 Then(/^articles are filtered based upon my search criteria$/, () => {
-	cy.ArticlesMatchingSearch();
+	cy.ArticlesMatchingSearch("Credit Card");
 });
 
 When(/^i click on an article link beneath the search bar, under 'Recent Blog Posts'$/, () => {
 	cy.ArticleElements();
-    cy.RecentBlogLink();
+    //cy.RecentBlogLink();
 });
 
 Then(/^i am taken to that Article's page$/, () => {

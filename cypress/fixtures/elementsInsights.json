@@ -8,5 +8,6 @@
     "letsGoButton": ".befh-solid-button",
     "modal": "div[class='space-y-4 text-sm text-befh-rb-gray-700 p-6 overflow-y-scroll no-scrollbar lg:max-h-128']",
     "okayButton": "button[class='bg-befh-rb-navy-700 text-sm float-right px-5 py-3 mr-6 rounded-lg text-white font-medium mt-4']",
-    "outside": "body"
+    "outside": "body",
+    "vantageScoreCredit":".twig-array-wrapper"
 }

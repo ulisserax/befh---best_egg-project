@@ -17,13 +17,25 @@ Cypress.on("uncaught:exception", () => {
 // 	cy.OtpLogin()
 
 // })
-  
+// afterEach( () => {
+// 	cy.request('https://twig.sbx.bestegg.com/financial-health/api/reset-user/');
+// }) 
+
 Given(/^i am on the Knowledge Center page$/, () => {
-	//cy.Login('jcastaldi', 'Aftermath1!')
-	cy.Login('testUser1122332')
+	//cy.Login('tivix3');
+	cy.LoginPage();
+	cy.contains('Sign in').click();
+	cy.contains('Sign in with your Best Egg login').click();
+    cy.SetUsername();
+	cy.SetPassword();
+	cy.ClickLoginButton();
+	cy.request(Cypress.config("baseUrl")).as("homeResponse");
+	cy.get('@homeResponse').its('status').should('eq', 200);
+	cy.PopupAssert();
+	cy.PopupClose();
+	//cy.Login('testUser1122332')
 	cy.IconHamburguer();
 	cy.KnowledgeCenter();
-	//cy.contains('Knowledge Center').click() it seems that we have to click first on a iconHamburguer and than click on the Knowledge
 });
 
 Given(/^i have not entered any text into search$/, () => {

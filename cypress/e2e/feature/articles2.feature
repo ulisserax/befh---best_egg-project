@@ -19,7 +19,7 @@ Scenario: Search articles
     And articles are filtered based upon my search criteria
 
 #=========================================================================================================================
-
+@focus
 Scenario: Recent blog posts
     When i click on an article link beneath the search bar, under 'Recent Blog Posts'
     Then i am taken to that Article's page

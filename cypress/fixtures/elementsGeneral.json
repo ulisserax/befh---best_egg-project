@@ -1,6 +1,6 @@
 {
     "button": "button[type='submit']",
-    "calculators": ":nth-child(7) > .flex > span",
+    "calculators": ":nth-child(8) > .flex > span",
     "closeGuideline2": ".welcome-modal__header > .btn-nude > app-icon-close > .icon-close",
     "closeGuideline": "button[type='button']",
     "financialHeader2": ":nth-child(3) > .primary-nav__link > span",

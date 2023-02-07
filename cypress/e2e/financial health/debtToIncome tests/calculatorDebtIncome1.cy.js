@@ -7,15 +7,22 @@ Cypress.on("uncaught:exception", () => {
 	// failing the test
 	return false;
   });
+
+// beforeEach( () => {
+// 	cy.request('https://twig.sbx.bestegg.com/financial-health/api/reset-user/');
+// }) 
   
 Given(/^I am on the Calculators header page$/, () => {
 	cy.LoginPage();
+	cy.contains('Sign in').click();
+	cy.contains('Sign in with your Best Egg login').click();
     cy.SetUsername();
 	cy.SetPassword();
 	cy.ClickLoginButton();
-    cy.wait(8000).PopupAssert();
+	cy.request(Cypress.config("baseUrl")).as("homeResponse");
+	cy.get('@homeResponse').its('status').should('eq', 200);
+    cy.PopupAssert();
 	cy.PopupClose();
-    cy.FinancialHealth();
     cy.IconHamburguer();
 	cy.Calculators();
 });

@@ -1,7 +1,7 @@
 {
-    "articlesFullDisplaying": "div[class='flex flex-col md:flex-row md:flex-wrap w-11/12 md:w-full']",
+    "articlesFullDisplaying": "div[class='flex flex-col md:flex-row md:flex-wrap md:w-full']",
     "articlePage": "div>section[class='xl:w-4/6']",
-    "article1": ":nth-child(1) > div.w-full > :nth-child(1) > .dashboard-card > a > .p-6",
+    "article1": "[style='order: 0;'] > div.w-full > :nth-child(1) > .dashboard-card > a > .object-cover",
     "article2": ":nth-child(2) > div.w-full > :nth-child(1) > .dashboard-card > a > .p-6",
     "article3": ":nth-child(3) > div.w-full > div > .mb-6 > a > .p-6",
     "blogLinks": ":nth-child(6) > [data-layer='Padding']",
@@ -13,7 +13,7 @@
     "date": "p[class='text-gray-500 mt-2 mb-8 font-bold']",
     "goToKnowledgePage": "a[class='mr-3 my-auto cursor-pointer']",
     "goToKnowledgePage2": ".h-6 > path",
-    "knowledgeCenter": ":nth-child(6) > .flex > span",
+    "knowledgeCenter": ":nth-child(7) > .flex > span",
     "nextPage": "div[class='flex justify-between my-4']>a>svg[class='h-5 w-5 ml-1']",
     "prevPage": "div[class='flex justify-between my-4']>a>svg[class='h-5 w-5 mr-1']",
     "pageHeroImage": "div>img[class='w-full h-96 rounded-lg object-cover']",

@@ -10,7 +10,7 @@
     "annualSalaryWages": "input[id='Annual Salary/Wages']",
     "calculatorButtonDebt": "button[class='befh-solid-button font-semibold button']",
     "calculatorSumResult": "p[class='text-sm text-gray-500 dti-itemized-results']",
-    "debtToIncome": ":nth-child(2) > .font-medium",
+    "debtToIncome": ":nth-child(2) > .font-semibold",
     "itemizeDebtButton": ":nth-child(2) > .inputField > .justify-end > .befh-borderless-button > span",
     "itemizeIncomeButton": ":nth-child(1) > .inputField > .justify-end > .befh-borderless-button > span",
     "itemizedAdditionalFields": "div[class='space-y-3 pb-3 dti-itemized-items']",

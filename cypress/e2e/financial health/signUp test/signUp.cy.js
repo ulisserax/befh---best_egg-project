@@ -128,11 +128,11 @@ When(/^I select 'Something else...'$/, () => {
 Then(/^I can submit text, with a 250 character limit$/, () => {
 	cy.get('label > .w-full')
 		.type('McCallum makes the case that business schools are currently too focused on leadership to the exclusion of its counterpart. They aim to attract ambitious applicants who are hoping that by developing their leadership ability, they will be recognized an');
-	cy.get('p[class="text-befh-rb-red-800"]').should('have.text', '250/250');	
+	cy.get('p[class="text-befh-rb-red-800"]').should('have.text', ' 250/250 ');	
 });
 
 Then(/^going over this limit results in a warning message - 'Character limit reached'$/, () => {
-	cy.get('span[class="text-befh-rb-red-800"]').should('have.text', 'Character limit reached');
+	cy.get('span[class="text-befh-rb-red-800"]').should('have.text', ' Character limit reached. ');
 });
 
 Given(/^I have filled in all info on the survey$/, () => {

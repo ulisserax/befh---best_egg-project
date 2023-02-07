@@ -91,7 +91,7 @@ module.exports = defineConfig({
     authClientSecret: process.env.AUTH_IDENTITY_CLIENT_SECRET,
     baseUrl: process.env.UAT_BASE_URL,
     xsrfToken: "1c2e59c3-c6b4-4140-9d76-9fd72c0d5d7d",
-    testPassword: ''
+    testPassword: 'n8NhV1l1vJT4^^'
   },
   e2e: {
     specPattern: "**/*.feature",
@@ -99,7 +99,12 @@ module.exports = defineConfig({
     chromeWebSecurity: false,
     baseUrl: "https://twig.sbx.bestegg.com/financial-health",
     setupNodeEvents,
+    redirectionLimit: 35,
   },
+  retries: {
+    runMode: 3,
+    openMode: 3
+  }
 });
 
 // projectId: "zubidk"

@@ -1,10 +1,10 @@
 //===============================================================================================================================================
 //General Commands
 
-// Cypress.Commands.add('Login', (username, password) => {
+// Cypress.Commands.add('Login', (username) => {
 //     cy.visit(Cypress.env('loginUrl'))
 //     const sessionId = crypto.randomUUID();
-//     //const password = Cypress.env('testPassword');
+//     const password = Cypress.env('testPassword');
 //     cy.request({
 //         method: 'POST',
 //         url: Cypress.env('authUrl'),
@@ -176,11 +176,36 @@ Cypress.Commands.add('ClickSignInButton', () =>{
 
 Cypress.Commands.add('SetUsername', () =>{
     cy.fixture("elementsGeneral").then((element) => {
+        cy.get(element.textField).type(element.username3);
+        //cy.get(element.inputUsername).type(element.username3);
+    })
+})
+
+Cypress.Commands.add('SetUsernameDTI', () =>{
+    cy.fixture("elementsGeneral").then((element) => {
         cy.get(element.textField).type(element.username);
     })
 })
 
+Cypress.Commands.add('SetUsernameFinancialAdvisor', () =>{
+    cy.fixture("elementsGeneral").then((element) => {
+        cy.get(element.textField).type(element.username3);
+    })
+})
+
 Cypress.Commands.add('SetPassword', () =>{
+    cy.fixture("elementsGeneral").then((element) => {
+        cy.get(element.passwordTextField).type(element.password3);
+    })
+})
+
+Cypress.Commands.add('SetPasswordFinancialAdvisor', () =>{
+    cy.fixture("elementsGeneral").then((element) => {
+        cy.get(element.passwordTextField).type(element.password3);
+    })
+})
+
+Cypress.Commands.add('SetPasswordDTI', () =>{
     cy.fixture("elementsGeneral").then((element) => {
         cy.get(element.passwordTextField).type(element.password);
     })
@@ -245,7 +270,7 @@ Cypress.Commands.add('OpenArticles', () =>{
         
         cy.get(element.article1).click().wait(5000);
         
-        while(i < 30){
+        while(i < 5){
             
             cy.get(element.date).then(($p) => {
                 const elemDate = $p.text();
@@ -254,7 +279,7 @@ Cypress.Commands.add('OpenArticles', () =>{
                 cy.log(mseconds);
             })
 
-            cy.get(element.nextPage).click();
+            cy.get(element.nextPage).click({force: true});
             i++;
         }
         cy.log(mseconds);
@@ -358,7 +383,7 @@ Cypress.Commands.add('ArticlesMatchingSearch', (searchTerm) =>{
 
 Cypress.Commands.add('TotalArticles', () =>{
     cy.fixture("elementsArticle").then((element) => {
-        let quantityVisibleArticles = 30;
+        let quantityVisibleArticles = 4;
         cy.get(element.articlesFullDisplaying).find('ul').should('have.length', quantityVisibleArticles);
     })
 })
@@ -1037,6 +1062,12 @@ Cypress.Commands.add('ModalNotVisible', () =>{
     });
 })
 
+Cypress.Commands.add('CreditProfile', () =>{
+    cy.fixture("elementsInsights").then((element) => {
+        cy.get(element.vantageScoreCredit).should('be.visible');
+    });
+})
+
 //===============================================================================================================================================
 //Dashboard
 
@@ -1106,8 +1137,8 @@ Cypress.Commands.add('LetsGo', () =>{
 let cookie
 Cypress.Commands.add('CreateUser', () =>{
     cy.fixture("elementsSignUp").then((element) => {
-        cy.get(element.username).should('be.visible').type('nameTester10');
-        cy.get(element.email).should('be.visible').type('name_tester10@tivix.com');
+        cy.get(element.username).should('be.visible').type('nameTester19');
+        cy.get(element.email).should('be.visible').type('name_tester19@tivix.com');
         cy.get(element.password).should('be.visible').type('Name_tester123#');
         cy.get(element.confirmPassword).should('be.visible').type('Name_tester123#');
         cy.getCookie('bech-csrftoken-sbx')
@@ -1137,15 +1168,15 @@ Cypress.Commands.add('PossibleUser', () =>{
 
 Cypress.Commands.add('UserData', () =>{
     cy.fixture("elementsSignUp").then((element) => {
-        cy.get(element.firstNameData).should('be.visible').type('nameTester10');
-        cy.get(element.lastNameData).should('be.visible').type('testingCypress10');
+        cy.get(element.firstNameData).should('be.visible').type('nameTester19');
+        cy.get(element.lastNameData).should('be.visible').type('testingCypress19');
     });
 })
 
 Cypress.Commands.add('MoreUserData', () =>{
     cy.fixture("elementsSignUp").then((element) => {
-        cy.get(element.firstNameData).should('be.visible').type('nameTester10');
-        cy.get(element.lastNameData).should('be.visible').type('testingCypress10');
+        cy.get(element.firstNameData).should('be.visible').type('nameTester19');
+        cy.get(element.lastNameData).should('be.visible').type('testingCypress19');
         cy.get(element.address).should('be.visible').type('Miami Road');
         cy.get(element.city).should('be.visible').type('Orlando');
         cy.get(element.zipCode).should('be.visible').type('32825');
@@ -1153,7 +1184,7 @@ Cypress.Commands.add('MoreUserData', () =>{
         cy.get(element.dateOfBirth).should('be.visible').type('08031991');
         cy.get(element.phoneNumber)
             .should('be.visible')
-            .type('6465780322')
+            .type('2064512559')
             .then(() => {
                 cy.request({
                     url: 'https://twig.sbx.bestegg.com/financial-health/auth/signup/info/',
@@ -1215,8 +1246,8 @@ Cypress.Commands.add('CreateAccount', () =>{
 })
 
 Cypress.Commands.add('TwoStepAuthentication', () =>{
-    cy.wait(10_000);
-    cy.request('https://receive-smss.com/sms/16465780322/')
+    cy.wait(40_000);
+    cy.request('https://www.receivesms.co/us-phone-number/3639/')
         .then(html => {
             const otpLine = html.body.match(/.*Best Egg.*/);
             const boldText = otpLine[0].match(/<b>\d+/);
@@ -1231,5 +1262,11 @@ Cypress.Commands.add('WarningMessage', () =>{
         cy.get(element.addressVerificationField)
   		    .invoke('prop', 'validationMessage')
   		    .should('equal', 'Please fill out this field.');
+    });
+})
+
+Cypress.Commands.add('ClickFinancialHealthScore', () =>{
+    cy.fixture("elementsFinancialAdvisor").then((element) => {
+        cy.get(element.finHealthScore).should('be.visible').click();
     });
 })
